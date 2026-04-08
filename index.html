@@ -4,11 +4,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@300;400;700;900&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
-        /* ПОДКЛЮЧЕНИЕ ШРИФТА (ОСТАВЛЯЕМ КАК ЕСТЬ) */
         @font-face {
             font-family: 'Cassandra';
             src: url('11 Cassandra.ttf') format('truetype');
@@ -20,7 +19,6 @@
             --bg-color: #f5f5ef;
             --accent: #719279;
             --text-dark: #2c2c2c;
-            --gold: #c5a059;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -33,178 +31,137 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ПЕРВАЯ СТРАНИЦА - НОВЫЙ ДИЗАЙН --- */
+        /* --- ПЕРВАЯ СТРАНИЦА (ЭФФЕКТ СЛОЕВ) --- */
         .hero {
-            height: 100vh; /* Вся высота экрана */
+            height: 100vh;
             position: relative;
-            display: flex;
-            flex-direction: column; /* Элементы друг под другом */
-            justify-content: flex-start; /* Начинаем сверху */
-            align-items: center;
-            overflow: hidden;
-            background-color: #e0e0d8; /* Фон */
-            padding-top: 10vh; /* Отступ сверху для текста */
-        }
-
-        /* Блок с текстом "60 ЖАС" */
-        .hero-text-bg {
             display: flex;
             flex-direction: column;
             align-items: center;
-            z-index: 1; /* Текст ЗА фото */
-            line-height: 0.8;
+            background-color: #e0e0d8;
+            overflow: hidden;
+        }
+
+        .hero-text-wrapper {
+            margin-top: 5vh; /* Отступ от самого верха */
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             text-align: center;
-            position: relative;
+            z-index: 1; /* Текст на нижнем слое */
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
             font-size: 200px;
+            font-weight: 900; /* Жирный */
             color: white;
-            display: block;
-            /* Добавим легкую тень, чтобы на светлом фоне было видно, если фото не перекроет */
-            text-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            line-height: 0.9;
+            text-shadow: 0 10px 20px rgba(0,0,0,0.05);
         }
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
             font-size: 140px;
+            font-weight: 400; /* Не жирный */
             color: white;
-            letter-spacing: 10px;
-            display: block;
-            text-shadow: 0 5px 15px rgba(0,0,0,0.1);
+            text-transform: uppercase;
+            letter-spacing: 5px;
+            line-height: 0.8;
         }
 
-        /* Блок для фотографии с эффектом прозрачности */
+        /* Фотография ПЕРЕД текстом */
         .hero-photo-container {
             position: absolute;
-            bottom: 0; /* Прижимаем к низу */
-            left: 0;
+            bottom: 0;
             width: 100%;
-            height: 65vh; /* Занимает ~2/3 страницы, текст сверху */
-            z-index: 2; /* Фото ПЕРЕД текстом */
-            overflow: hidden;
-            pointer-events: none; /* Чтобы не мешало скроллу */
+            height: 75vh; /* Высота контейнера фото */
+            z-index: 2; /* Слой ПЕРЕД текстом ЖАС */
+            display: flex;
+            justify-content: center;
+            align-items: flex-end;
         }
 
-        /* Сама фотография */
         .hero-photo {
             width: 100%;
             height: 100%;
-            object-fit: contain; /* Сохраняем пропорции лица */
-            object-position: bottom center; /* Выравниваем по низу */
-            
-            /* --- МАГИЯ ПРОЗРАЧНОСТИ ВНИЗУ (VIGNETTE) --- */
-            /* Этот градиент делает низ фото прозрачным */
-            -webkit-mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 60%, transparent 100%);
+            object-fit: contain;
+            object-position: bottom center;
+            /* Плавное исчезновение низа */
+            -webkit-mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 75%, transparent 100%);
         }
 
-        /* --- КОНЕЦ ОБНОВЛЕННОГО ДИЗАЙНА ПЕРВОЙ СТРАНИЦЫ --- */
-
-        /* ВТОРАЯ СТРАНИЦА И ДАЛЕЕ (ОСТАВЛЯЕМ БЕЗ ИЗМЕНЕНИЙ) */
+        /* --- ВТОРАЯ СТРАНИЦА И ДАЛЕЕ --- */
         .section {
             padding: 80px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
             position: relative;
-            z-index: 3; /* Чтобы текст второй страницы был поверх прозрачности */
+            z-index: 3;
         }
 
         .title-main { 
             font-family: 'Cassandra', serif !important;
-            font-size: 3.5rem; 
+            font-size: 3.2rem; 
             margin-bottom: 20px; 
             color: var(--accent); 
-            line-height: 1.2;
         }
 
-        .text-invite { 
-            font-family: 'Cormorant Garamond', serif;
-            font-size: 1.6rem; 
-            line-height: 1.6; 
-            margin-bottom: 40px; 
-            font-weight: 400; 
-        }
-        
         .restaurant-img {
             width: 100%;
-            height: 350px;
+            height: 300px;
             object-fit: cover;
-            border-radius: 2px;
+            border-radius: 4px;
             margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
         }
 
         .info-grid {
             text-align: left;
-            margin: 40px auto;
+            margin: 30px auto;
             display: inline-block;
             font-size: 1.1rem;
-            line-height: 2.2;
+            line-height: 2;
         }
-
-        .info-item b { color: var(--accent); }
 
         .btn-map {
             display: inline-block;
-            padding: 18px 35px;
+            padding: 15px 30px;
             background-color: var(--accent);
             color: white;
             text-decoration: none;
             border-radius: 50px;
-            margin-top: 20px;
-            transition: 0.3s;
-            font-size: 0.9rem;
-            letter-spacing: 1px;
             font-weight: bold;
         }
 
-        .timer-container { margin: 60px 0; }
-        #countdown {
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .time-box { background: white; padding: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .time-box span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
-
         .form-container {
             background: white;
-            padding: 40px 25px;
-            border-radius: 10px;
-            box-shadow: 0 15px 45px rgba(0,0,0,0.05);
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
             margin-top: 50px;
-            text-align: center;
         }
 
         .form-container h2 {
             font-family: 'Montserrat', sans-serif !important;
             font-weight: 700;
-            font-size: 2rem;
-            color: var(--accent);
             text-transform: uppercase;
-            margin-bottom: 10px;
+            color: var(--accent);
         }
 
         .form-subtitle {
             font-family: 'Cassandra', serif !important;
             font-size: 1.8rem;
-            color: var(--text-dark);
-            margin-bottom: 35px;
-            line-height: 1.2;
+            margin: 15px 0 30px;
         }
 
-        input[type="text"], select {
+        input, select {
             width: 100%;
             padding: 15px;
-            margin: 10px 0 25px;
-            border: 1px solid #ddd;
-            background: var(--bg-color);
-            font-family: 'Montserrat', sans-serif;
-            border-radius: 5px;
-            text-align: left;
+            margin: 10px 0 20px;
+            border: 1px solid #eee;
+            background: #fafafa;
         }
 
         .submit-btn {
@@ -213,23 +170,15 @@
             background: var(--accent);
             color: white;
             border: none;
-            cursor: pointer;
-            font-size: 1rem;
-            text-transform: uppercase;
-            letter-spacing: 2px;
             font-weight: bold;
-            transition: 0.3s;
+            text-transform: uppercase;
         }
 
-        .submit-btn:hover { background: #5a7561; }
-
         @media (max-width: 600px) {
-            .hero { padding-top: 15vh; } /* Больше отступ сверху на мобильных */
-            .num-60 { font-size: 120px; }
-            .word-zhas { font-size: 80px; }
-            .hero-photo-container { height: 55vh; } /* Меньше фото на мобильных */
+            .num-60 { font-size: 160px; }
+            .word-zhas { font-size: 100px; }
+            .hero-photo-container { height: 65vh; }
             .title-main { font-size: 2.2rem; }
-            .form-subtitle { font-size: 1.5rem; }
         }
 
         .reveal { visibility: hidden; }
@@ -238,7 +187,7 @@
 <body>
 
     <section class="hero">
-        <div class="hero-text-bg">
+        <div class="hero-text-wrapper">
             <span class="num-60">60</span>
             <span class="word-zhas">ЖАС</span>
         </div>
@@ -247,10 +196,11 @@
             <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
         </div>
     </section>
+
     <section class="section">
-        <p class="reveal" style="font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 10px;">СІЗДЕРДІ</p>
+        <p class="reveal">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p class="text-invite reveal">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <p class="reveal">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
         <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" class="restaurant-img reveal">
 
@@ -264,33 +214,18 @@
         <br>
         <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
 
-        <div class="timer-container reveal">
-            <h2 style="margin-bottom: 20px; font-weight: 300;">Тойға дейін қалды:</h2>
-            <div id="countdown">
-                <div class="time-box"><span id="days">00</span>күн</div>
-                <div class="time-box"><span id="hours">00</span>сағат</div>
-                <div class="time-box"><span id="minutes">00</span>мин</div>
-            </div>
-        </div>
-
         <div class="form-container reveal">
             <h2>Сауалнама</h2>
             <p class="form-subtitle">Қатысуыңызды растап, қонақтарға арналған форманы толтырыңызды сұраймыз</p>
             
             <form id="invite-form">
-                <div style="text-align: left;"><label>Атыңыз *</label></div>
-                <input type="text" name="аты" required placeholder="Мысалы: Арман">
-                
-                <div style="text-align: left;"><label>Тегіңіз *</label></div>
-                <input type="text" name="тегі" required placeholder="Мысалы: Каримов">
-
-                <div style="text-align: left;"><label>Тойға келесіз бе? *</label></div>
+                <input type="text" name="аты" required placeholder="Атыңыз">
+                <input type="text" name="тегі" required placeholder="Тегіңіз">
                 <select name="жауап" required>
-                    <option value="" disabled selected>Таңдаңыз</option>
+                    <option value="" disabled selected>Келесіз бе?</option>
                     <option value="Иә, келемін">Иә, келемін</option>
                     <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
                 </select>
-
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
             <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет! Жауабыңыз қабылданды.</div>
@@ -298,49 +233,25 @@
     </section>
 
     <script>
-        // Анимации при скролле
-        ScrollReveal().reveal('.reveal', { 
-            delay: 300, 
-            distance: '50px', 
-            origin: 'bottom', 
-            interval: 200,
-            duration: 1000
-        });
+        ScrollReveal().reveal('.reveal', { delay: 300, distance: '50px', origin: 'bottom', interval: 200, duration: 1000 });
 
-        // Таймер (2 июля 2026)
-        const targetDate = new Date("July 2, 2026 17:00:00").getTime();
-
-        setInterval(function() {
-            const now = new Date().getTime();
-            const diff = targetDate - now;
-            const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-            const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-            const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-            document.getElementById("days").innerText = d;
-            document.getElementById("hours").innerText = h;
-            document.getElementById("minutes").innerText = m;
-        }, 1000);
-
-        // Отправка в Google Sheets (URL ОСТАВЛЯЕМ ТВОЙ)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbwAUUcuGra39L7C3h9Sqyx74jiS_sdNF5T4FkpuewObHhCqPVZtE0Q4jvxpNKj1yGYCtQ/exec'
         const form = document.getElementById('invite-form')
         const btn = document.getElementById('submitBtn')
-        const msg = document.getElementById('msg')
 
         form.addEventListener('submit', e => {
-            e.preventDefault()
-            btn.disabled = true
-            btn.innerText = 'Жіберілуде...'
-            
+            e.preventDefault();
+            btn.disabled = true;
+            btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(response => {
-                    form.style.display = 'none'
-                    msg.style.display = 'block'
+                .then(() => {
+                    form.style.display = 'none';
+                    document.getElementById('msg').style.display = 'block';
                 })
-                .catch(error => {
-                    alert('Қате кетті! Қайта көріңіз.')
-                    btn.disabled = false
-                    btn.innerText = 'Жіберу'
+                .catch(() => {
+                    alert('Қате кетті!');
+                    btn.disabled = false;
+                    btn.innerText = 'Жіберу';
                 })
         })
     </script>
