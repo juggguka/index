@@ -4,9 +4,18 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
-    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@400;600&family=Montserrat:wght@300;400;700&display=swap" rel="stylesheet">
     <script src="https://unpkg.com/scrollreveal"></script>
+    
     <style>
+        /* ПОДКЛЮЧЕНИЕ ШРИФТА */
+        @font-face {
+            font-family: 'Cassandra';
+            src: url('11 Cassandra.ttf') format('truetype');
+            font-weight: normal;
+            font-style: normal;
+        }
+        
         :root {
             --bg-color: #f5f5ef;
             --accent: #719279;
@@ -15,15 +24,16 @@
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
+        
         body { 
             background-color: var(--bg-color); 
-            font-family: 'Cormorant Garamond', serif; 
+            font-family: 'Montserrat', sans-serif; 
             color: var(--text-dark);
             overflow-x: hidden;
             scroll-behavior: smooth;
         }
 
-        /* Первая страница - Эффект iOS */
+        /* ПЕРВАЯ СТРАНИЦА - ЭФФЕКТ iOS */
         .hero {
             height: 100vh;
             position: relative;
@@ -31,29 +41,43 @@
             justify-content: center;
             align-items: center;
             overflow: hidden;
-            background: #e0e0d8; /* Фон если фото не загрузится */
+            background: #e0e0d8;
         }
 
         .hero-text-bg {
             position: absolute;
-            font-size: 15vw;
-            font-weight: 700;
-            color: white;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
             z-index: 1;
-            white-space: nowrap;
-            text-transform: uppercase;
+            line-height: 0.8;
+            text-align: center;
+        }
+
+        .num-60 {
+            font-family: 'Cassandra', serif !important;
+            font-size: 200px;
+            color: white;
+            display: block;
+        }
+
+        .word-zhas {
+            font-family: 'Cassandra', serif !important;
+            font-size: 140px;
+            color: white;
             letter-spacing: 10px;
+            display: block;
         }
 
         .hero-photo {
             position: absolute;
             bottom: 0;
-            height: 90vh; /* Человек чуть выше текста */
+            height: 90vh;
             z-index: 2;
             pointer-events: none;
         }
 
-        /* Вторая страница */
+        /* ВТОРАЯ СТРАНИЦА */
         .section {
             padding: 80px 20px;
             text-align: center;
@@ -61,12 +85,25 @@
             margin: 0 auto;
         }
 
-        .title-main { font-size: 2.5rem; margin-bottom: 20px; color: var(--accent); }
-        .text-invite { font-size: 1.5rem; line-height: 1.6; margin-bottom: 40px; font-weight: 300; }
+        .title-main { 
+            font-family: 'Cassandra', serif !important;
+            font-size: 3.5rem; 
+            margin-bottom: 20px; 
+            color: var(--accent); 
+            line-height: 1.2;
+        }
+
+        .text-invite { 
+            font-family: 'Cormorant Garamond', serif;
+            font-size: 1.6rem; 
+            line-height: 1.6; 
+            margin-bottom: 40px; 
+            font-weight: 400; 
+        }
         
         .restaurant-img {
             width: 100%;
-            height: 300px;
+            height: 350px;
             object-fit: cover;
             border-radius: 2px;
             margin: 30px 0;
@@ -77,46 +114,61 @@
             text-align: left;
             margin: 40px auto;
             display: inline-block;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
-            line-height: 2;
+            font-size: 1.1rem;
+            line-height: 2.2;
         }
 
         .info-item b { color: var(--accent); }
 
         .btn-map {
             display: inline-block;
-            padding: 15px 30px;
+            padding: 18px 35px;
             background-color: var(--accent);
             color: white;
             text-decoration: none;
             border-radius: 50px;
             margin-top: 20px;
             transition: 0.3s;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 0.8rem;
+            font-size: 0.9rem;
             letter-spacing: 1px;
+            font-weight: bold;
         }
 
-        /* Таймер */
+        /* ТАЙМЕР */
         .timer-container { margin: 60px 0; }
         #countdown {
             display: flex;
             justify-content: center;
-            gap: 20px;
-            font-family: 'Montserrat', sans-serif;
+            gap: 15px;
         }
-        .time-box { background: white; padding: 15px; min-width: 70px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
-        .time-box span { display: block; font-size: 1.5rem; font-weight: bold; }
+        .time-box { background: white; padding: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+        .time-box span { display: block; font-size: 1.8rem; font-weight: bold; color: var(--accent); }
 
-        /* Анкета */
+        /* АНКЕТА (САУАЛНАМА) */
         .form-container {
             background: white;
-            padding: 40px;
-            border-radius: 5px;
+            padding: 40px 25px;
+            border-radius: 10px;
             box-shadow: 0 15px 45px rgba(0,0,0,0.05);
             margin-top: 50px;
-            text-align: left;
+            text-align: center;
+        }
+
+        .form-container h2 {
+            font-family: 'Montserrat', sans-serif !important; /* ОБЫЧНЫЙ ШРИФТ */
+            font-weight: 700;
+            font-size: 2rem;
+            color: var(--accent);
+            text-transform: uppercase;
+            margin-bottom: 10px;
+        }
+
+        .form-subtitle {
+            font-family: 'Cassandra', serif !important; /* КАССАНДРА */
+            font-size: 1.8rem;
+            color: var(--text-dark);
+            margin-bottom: 35px;
+            line-height: 1.2;
         }
 
         input[type="text"], select {
@@ -126,12 +178,13 @@
             border: 1px solid #ddd;
             background: var(--bg-color);
             font-family: 'Montserrat', sans-serif;
+            border-radius: 5px;
+            text-align: left;
         }
 
-        .radio-group { margin-bottom: 25px; }
         .submit-btn {
             width: 100%;
-            padding: 18px;
+            padding: 20px;
             background: var(--accent);
             color: white;
             border: none;
@@ -139,21 +192,36 @@
             font-size: 1rem;
             text-transform: uppercase;
             letter-spacing: 2px;
+            font-weight: bold;
+            transition: 0.3s;
         }
 
-        /* Анимации */
+        .submit-btn:hover { background: #5a7561; }
+
+        /* МОБИЛЬНАЯ АДАПТАЦИЯ */
+        @media (max-width: 600px) {
+            .num-60 { font-size: 140px; }
+            .word-zhas { font-size: 90px; }
+            .title-main { font-size: 2.2rem; }
+            .form-subtitle { font-size: 1.5rem; }
+            .hero-photo { height: 80vh; }
+        }
+
         .reveal { visibility: hidden; }
     </style>
 </head>
 <body>
 
     <section class="hero">
-        <div class="hero-text-bg">60 ЖАС</div>
+        <div class="hero-text-bg">
+            <span class="num-60">60</span>
+            <span class="word-zhas">ЖАС</span>
+        </div>
         <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
     </section>
 
     <section class="section">
-        <p class="reveal" style="font-size: 1.8rem; letter-spacing: 5px;">СІЗДЕРДІ</p>
+        <p class="reveal" style="font-size: 1.5rem; letter-spacing: 5px; margin-bottom: 10px;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
         <p class="text-invite reveal">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
@@ -170,7 +238,7 @@
         <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
 
         <div class="timer-container reveal">
-            <h2 style="margin-bottom: 20px;">Тойға дейін қалды:</h2>
+            <h2 style="margin-bottom: 20px; font-weight: 300;">Тойға дейін қалды:</h2>
             <div id="countdown">
                 <div class="time-box"><span id="days">00</span>күн</div>
                 <div class="time-box"><span id="hours">00</span>сағат</div>
@@ -179,17 +247,17 @@
         </div>
 
         <div class="form-container reveal">
-            <h2 style="text-align: center; color: var(--accent);">Сауалнама</h2>
-            <p style="text-align: center; margin-bottom: 30px;">Қатысуыңызды растап, қонақтарға арналған форманы толтырыңызды сұраймыз</p>
+            <h2>Сауалнама</h2>
+            <p class="form-subtitle">Қатысуыңызды растап, қонақтарға арналған форманы толтырыңызды сұраймыз</p>
             
             <form id="invite-form">
-                <label>Атыңыз *</label>
+                <div style="text-align: left;"><label>Атыңыз *</label></div>
                 <input type="text" name="аты" required placeholder="Мысалы: Арман">
                 
-                <label>Тегіңіз *</label>
+                <div style="text-align: left;"><label>Тегіңіз *</label></div>
                 <input type="text" name="тегі" required placeholder="Мысалы: Каримов">
 
-                <label>Тойға келесіз бе? *</label>
+                <div style="text-align: left;"><label>Тойға келесіз бе? *</label></div>
                 <select name="жауап" required>
                     <option value="" disabled selected>Таңдаңыз</option>
                     <option value="Иә, келемін">Иә, келемін</option>
@@ -198,7 +266,7 @@
 
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent);">Рахмет! Жауабыңыз қабылданды.</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет! Жауабыңыз қабылданды.</div>
         </div>
     </section>
 
@@ -212,17 +280,15 @@
             duration: 1000
         });
 
-        // Таймер обратного отсчета (2 июля 2026)
+        // Таймер (2 июля 2026)
         const targetDate = new Date("July 2, 2026 17:00:00").getTime();
 
         setInterval(function() {
             const now = new Date().getTime();
             const diff = targetDate - now;
-
             const d = Math.floor(diff / (1000 * 60 * 60 * 24));
             const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
             const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-
             document.getElementById("days").innerText = d;
             document.getElementById("hours").innerText = h;
             document.getElementById("minutes").innerText = m;
