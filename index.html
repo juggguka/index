@@ -8,6 +8,7 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
+        /* ПОДКЛЮЧЕНИЕ ШРИФТА (ОСТАВЛЯЕМ КАК ЕСТЬ) */
         @font-face {
             font-family: 'Cassandra';
             src: url('11 Cassandra.ttf') format('truetype');
@@ -43,21 +44,22 @@
         }
 
         .hero-text-wrapper {
-            margin-top: 0; /* Убрали отступ, чтобы влезло гигантское число */
+            margin-top: 0; /* Убрали все отступы */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            z-index: 1;
+            z-index: 1; /* Текст ЗА фото */
+            width: 100%; /* Занимает всю ширину */
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 500px; /* ЭКСТРЕМАЛЬНО БОЛЬШОЙ РАЗМЕР */
+            font-size: 800px; /* ГИГАНТСКИЙ РАЗМЕР ДЛЯ ПК */
             font-weight: 900;
             color: white;
-            line-height: 0.65; /* Сильнее прижимаем, чтобы не было пустоты */
-            letter-spacing: -10px;
+            line-height: 0.7; /* Максимально прижимаем текст */
+            display: block;
         }
 
         .word-zhas {
@@ -65,16 +67,17 @@
             font-size: 140px; 
             font-weight: 400;
             color: white;
-            line-height: 0.7;
-            margin-top: -40px; /* Жас заходит на нижнюю часть 60 */
+            display: block;
+            margin-top: -20px; /* Сильнее прижали к числу */
         }
 
+        /* Контейнер для фото */
         .hero-photo-container {
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 75vh;
-            z-index: 2; 
+            height: 75vh; /* Занимает 3/4 страницы */
+            z-index: 2; /* Фото ПЕРЕД текстом */
             display: flex;
             justify-content: center;
             align-items: flex-end;
@@ -85,20 +88,20 @@
             height: 100%;
             object-fit: contain;
             object-position: bottom center;
-            /* Плавное исчезновение */
+            /* Плавное исчезновение низа */
             -webkit-mask-image: linear-gradient(to bottom, 
                 black 0%, 
-                black 50%, 
+                black 45%, 
                 rgba(0,0,0,0.2) 85%, 
                 transparent 100%);
             mask-image: linear-gradient(to bottom, 
                 black 0%, 
-                black 50%, 
+                black 45%, 
                 rgba(0,0,0,0.2) 85%, 
                 transparent 100%);
         }
 
-        /* --- СЕКЦИЯ С ИНФОРМАЦИЕЙ --- */
+        /* --- ОСТАЛЬНЫЕ СЕКЦИИ (БЕЗ ИЗМЕНЕНИЙ) --- */
         .section {
             padding: 80px 20px;
             text-align: center;
@@ -120,8 +123,8 @@
             margin: 30px auto;
             display: inline-block;
             font-family: 'Cassandra', serif !important;
-            font-size: 2.4rem; /* Еще немного увеличил для читаемости */
-            line-height: 1.3;
+            font-size: 2.2rem; /* Оставили как просил раньше */
+            line-height: 1.4;
         }
 
         .info-item b { color: var(--accent); font-weight: normal; }
@@ -137,28 +140,65 @@
             margin-top: 20px;
         }
 
+        .form-container {
+            background: white;
+            padding: 40px 20px;
+            border-radius: 15px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+            margin-top: 50px;
+        }
+
+        .form-container h2 {
+            font-family: 'Montserrat', sans-serif !important;
+            font-weight: 700;
+            text-transform: uppercase;
+            color: var(--accent);
+        }
+
+        .form-subtitle {
+            font-family: 'Cassandra', serif !important;
+            font-size: 1.8rem;
+            margin-top: 10px;
+        }
+
+        input, select {
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0 20px;
+            border: 1px solid #eee;
+            border-radius: 5px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            font-weight: bold;
+            text-transform: uppercase;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
         /* МОБИЛЬНАЯ ВЕРСИЯ */
         @media (max-width: 600px) {
+            .hero-text-wrapper {
+                margin-top: 5vh; /* Немного опустили, чтобы на телефоне влезло */
+            }
             .num-60 { 
-                font-size: 80vw; /* Занимает 80% ширины экрана телефона */
+                font-size: 100vw; /* Занимает 100% ширины экрана телефона */
                 line-height: 0.7;
             }
             .word-zhas { 
                 font-size: 30vw; 
                 margin-top: -10vw;
             }
-            .info-grid { font-size: 1.8rem; }
+            .info-grid { font-size: 1.6rem; }
             .hero-photo-container { height: 60vh; }
         }
 
         .reveal { visibility: hidden; }
-
-        /* Стили анкеты (оставляем как просил раньше) */
-        .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
-        .form-container h2 { font-family: 'Montserrat', sans-serif !important; font-weight: 700; text-transform: uppercase; }
-        .form-subtitle { font-family: 'Cassandra', serif !important; font-size: 1.8rem; margin-top: 10px; }
-        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; text-transform: uppercase; border-radius: 5px; cursor: pointer; }
     </style>
 </head>
 <body>
@@ -193,7 +233,7 @@
 
         <div class="form-container reveal">
             <h2>Сауалнама</h2>
-            <p class="form-subtitle">Қатысуыңызды растап, қонақтарға арналған форманы толтыруыңызды сұраймыз</p>
+            <p class="form-subtitle">Қатысуыңызды растап, қонақтарға арналған форманы толтырыңызды сұраймыз</p>
             
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
