@@ -8,7 +8,6 @@
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
-        /* ПОДКЛЮЧЕНИЕ ШРИФТА (ОСТАВЛЯЕМ КАК ЕСТЬ) */
         @font-face {
             font-family: 'Cassandra';
             src: url('11 Cassandra.ttf') format('truetype');
@@ -34,7 +33,7 @@
 
         /* --- ПЕРВАЯ СТРАНИЦА --- */
         .hero {
-            height: 100vh;
+            min-height: 100vh;
             position: relative;
             display: flex;
             flex-direction: column;
@@ -43,44 +42,49 @@
             overflow: hidden;
         }
 
+        /* Те самые два "энтера" перед 60 */
+        .spacer {
+            height: 15vh; /* Высота двух абзацев */
+            width: 100%;
+        }
+
         .hero-text-wrapper {
-            margin-top: 0; /* Убрали все отступы */
             display: flex;
             flex-direction: column;
             align-items: center;
             text-align: center;
-            z-index: 1; /* Текст ЗА фото */
-            width: 100%; /* Занимает всю ширину */
+            z-index: 1;
+            width: 100%;
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 800px; /* ГИГАНТСКИЙ РАЗМЕР ДЛЯ ПК */
+            font-size: 100vw; /* На весь экран */
             font-weight: 900;
             color: white;
-            line-height: 0.7; /* Максимально прижимаем текст */
+            line-height: 0.6; 
             display: block;
         }
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
-            font-size: 140px; 
+            font-size: 30vw; /* Соразмерно большой */
             font-weight: 400;
             color: white;
             display: block;
-            margin-top: -20px; /* Сильнее прижали к числу */
+            margin-top: -5vw;
         }
 
         /* Контейнер для фото */
         .hero-photo-container {
-            position: absolute;
-            bottom: 0;
+            position: relative; /* Теперь фото идет сразу за текстом */
             width: 100%;
-            height: 75vh; /* Занимает 3/4 страницы */
-            z-index: 2; /* Фото ПЕРЕД текстом */
+            height: 80vh; 
+            z-index: 2; 
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            margin-top: -10vh; /* Накладываем фото на текст для плавности */
         }
 
         .hero-photo {
@@ -88,122 +92,62 @@
             height: 100%;
             object-fit: contain;
             object-position: bottom center;
-            /* Плавное исчезновение низа */
+            /* Плавный переход в прозрачность в самом конце */
             -webkit-mask-image: linear-gradient(to bottom, 
                 black 0%, 
-                black 45%, 
-                rgba(0,0,0,0.2) 85%, 
+                black 60%, 
+                rgba(0,0,0,0.1) 90%, 
                 transparent 100%);
             mask-image: linear-gradient(to bottom, 
                 black 0%, 
-                black 45%, 
-                rgba(0,0,0,0.2) 85%, 
+                black 60%, 
+                rgba(0,0,0,0.1) 90%, 
                 transparent 100%);
         }
 
-        /* --- ОСТАЛЬНЫЕ СЕКЦИИ (БЕЗ ИЗМЕНЕНИЙ) --- */
+        /* --- ИНФОРМАЦИЯ КАССАНДРОЙ --- */
         .section {
-            padding: 80px 20px;
+            padding: 60px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            position: relative;
-            z-index: 3;
-        }
-
-        .title-main { 
-            font-family: 'Cassandra', serif !important;
-            font-size: 3rem; 
-            margin-bottom: 20px; 
-            color: var(--accent); 
         }
 
         .info-grid {
             text-align: left;
-            margin: 30px auto;
+            margin: 40px auto;
             display: inline-block;
             font-family: 'Cassandra', serif !important;
-            font-size: 2.2rem; /* Оставили как просил раньше */
+            font-size: 2.2rem;
             line-height: 1.4;
         }
 
         .info-item b { color: var(--accent); font-weight: normal; }
 
-        .btn-map {
-            display: inline-block;
-            padding: 15px 35px;
-            background-color: var(--accent);
-            color: white;
-            text-decoration: none;
-            border-radius: 50px;
-            font-weight: bold;
-            margin-top: 20px;
-        }
-
-        .form-container {
-            background: white;
-            padding: 40px 20px;
-            border-radius: 15px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05);
-            margin-top: 50px;
-        }
-
-        .form-container h2 {
-            font-family: 'Montserrat', sans-serif !important;
-            font-weight: 700;
-            text-transform: uppercase;
-            color: var(--accent);
-        }
-
-        .form-subtitle {
-            font-family: 'Cassandra', serif !important;
-            font-size: 1.8rem;
-            margin-top: 10px;
-        }
-
-        input, select {
-            width: 100%;
-            padding: 15px;
-            margin: 10px 0 20px;
-            border: 1px solid #eee;
-            border-radius: 5px;
-        }
-
-        .submit-btn {
-            width: 100%;
-            padding: 20px;
-            background: var(--accent);
-            color: white;
-            border: none;
-            font-weight: bold;
-            text-transform: uppercase;
-            border-radius: 5px;
-            cursor: pointer;
-        }
-
-        /* МОБИЛЬНАЯ ВЕРСИЯ */
+        /* Адаптация под мобильные */
         @media (max-width: 600px) {
-            .hero-text-wrapper {
-                margin-top: 5vh; /* Немного опустили, чтобы на телефоне влезло */
-            }
-            .num-60 { 
-                font-size: 100vw; /* Занимает 100% ширины экрана телефона */
-                line-height: 0.7;
-            }
-            .word-zhas { 
-                font-size: 30vw; 
-                margin-top: -10vw;
-            }
+            .num-60 { font-size: 100vw; }
+            .word-zhas { font-size: 35vw; }
             .info-grid { font-size: 1.6rem; }
-            .hero-photo-container { height: 60vh; }
+            .spacer { height: 10vh; }
         }
 
+        /* Остальные стили */
+        .title-main { font-family: 'Cassandra', serif !important; font-size: 3rem; color: var(--accent); margin-bottom: 20px; }
+        .btn-map { display: inline-block; padding: 15px 35px; background-color: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 20px; }
+        .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
+        .form-container h2 { font-family: 'Montserrat', sans-serif !important; font-weight: 700; text-transform: uppercase; }
+        .form-subtitle { font-family: 'Cassandra', serif !important; font-size: 1.8rem; margin-top: 10px; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; text-transform: uppercase; border-radius: 5px; cursor: pointer; }
         .reveal { visibility: hidden; }
     </style>
 </head>
 <body>
 
     <section class="hero">
+        <div class="spacer"></div>
+        
         <div class="hero-text-wrapper">
             <span class="num-60">60</span>
             <span class="word-zhas">Жас</span>
