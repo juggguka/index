@@ -31,38 +31,38 @@
             scroll-behavior: smooth;
         }
 
-        /* --- МУЗЫКАЛЬНЫЙ ПЛЕЕР --- */
+        /* --- КНОПКА МУЗЫКИ (Вращающаяся иконка) --- */
         .music-control {
             position: fixed;
-            top: 20px;
-            right: 20px;
+            bottom: 25px;
+            right: 25px;
             z-index: 100;
-            background: white;
-            padding: 10px;
+            width: 65px;
+            height: 65px;
             border-radius: 50%;
             cursor: pointer;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            width: 50px;
-            height: 50px;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 20px;
+            background-color: white;
+            background-image: url('music-icon.png');
+            background-size: 65%;
+            background-position: center;
+            background-repeat: no-repeat;
+            border: 3px solid var(--accent);
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
             transition: all 0.3s ease;
         }
 
-        @keyframes spin {
+        @keyframes spin360 {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
         .playing {
-            animation: spin 4s linear infinite;
-            background: var(--accent) !important;
-            color: white !important;
+            animation: spin360 4s linear infinite;
+            box-shadow: 0 0 20px var(--accent);
+            border-color: #4a6350;
         }
 
-        /* --- ПЕРВАЯ СТРАНИЦА --- */
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
         .hero {
             min-height: 100vh;
             position: relative;
@@ -73,11 +73,7 @@
             overflow: hidden;
         }
 
-        /* Два "энтера" перед числом */
-        .spacer {
-            height: 15vh;
-            width: 100%;
-        }
+        .spacer { height: 12vh; width: 100%; }
 
         .hero-text-wrapper {
             display: flex;
@@ -100,13 +96,11 @@
         .word-zhas {
             font-family: 'Cassandra', serif !important;
             font-size: 30vw;
-            font-weight: 400;
             color: white;
             display: block;
             margin-top: -5vw;
         }
 
-        /* Фото мужчины сразу под текстом */
         .hero-photo-container {
             position: relative;
             width: 100%;
@@ -115,7 +109,7 @@
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-top: -10vh; /* Наложение на текст */
+            margin-top: -10vh;
         }
 
         .hero-photo {
@@ -123,11 +117,11 @@
             height: 100%;
             object-fit: contain;
             object-position: bottom center;
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 65%, rgba(0,0,0,0.1) 95%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 0%, black 65%, rgba(0,0,0,0.1) 95%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
         }
 
-        /* --- СЕКЦИЯ С ИНФОРМАЦИЕЙ --- */
+        /* --- КОНТЕНТ --- */
         .section {
             padding: 60px 20px;
             text-align: center;
@@ -135,13 +129,8 @@
             margin: 0 auto;
         }
 
-        .title-main { 
-            font-family: 'Cassandra', serif !important; 
-            font-size: 3rem; 
-            color: var(--accent); 
-            margin-bottom: 20px; 
-        }
-
+        .title-main { font-family: 'Cassandra', serif !important; font-size: 2.8rem; color: var(--accent); margin-bottom: 20px; }
+        
         .info-grid {
             text-align: left;
             margin: 40px auto;
@@ -154,66 +143,25 @@
         .info-item b { color: var(--accent); font-weight: normal; }
 
         .btn-map { 
-            display: inline-block; 
-            padding: 15px 35px; 
-            background-color: var(--accent); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            margin-top: 20px; 
+            display: inline-block; padding: 15px 35px; background-color: var(--accent); 
+            color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 20px; 
         }
 
-        /* --- АНКЕТА --- */
-        .form-container { 
-            background: white; 
-            padding: 40px 20px; 
-            border-radius: 15px; 
-            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
-            margin-top: 50px; 
-        }
+        /* --- ФОРМА --- */
+        .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
         
-        .form-container h2 { 
-            font-family: 'Montserrat', sans-serif !important; 
-            font-weight: 700; 
-            text-transform: uppercase; 
-        }
+        #extra-question { display: none; margin-top: 10px; border-left: 4px solid var(--accent); padding-left: 15px; text-align: left; }
 
-        #extra-question { 
-            display: none; 
-            margin-top: 10px; 
-            border-left: 4px solid var(--accent); 
-            padding-left: 15px; 
-            text-align: left;
-        }
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; font-family: 'Montserrat', sans-serif; }
 
-        input, select { 
-            width: 100%; 
-            padding: 15px; 
-            margin: 10px 0 20px; 
-            border: 1px solid #eee; 
-            border-radius: 5px; 
-            font-family: 'Montserrat', sans-serif;
-        }
-
-        .submit-btn { 
-            width: 100%; 
-            padding: 20px; 
-            background: var(--accent); 
-            color: white; 
-            border: none; 
-            font-weight: bold; 
-            text-transform: uppercase; 
-            border-radius: 5px; 
-            cursor: pointer; 
-        }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; text-transform: uppercase; border-radius: 5px; cursor: pointer; }
 
         @media (max-width: 600px) {
             .num-60 { font-size: 100vw; }
             .word-zhas { font-size: 35vw; }
             .info-grid { font-size: 1.6rem; }
-            .title-main { font-size: 2rem; }
-            .spacer { height: 10vh; }
+            .title-main { font-size: 1.8rem; }
+            .music-control { width: 55px; height: 55px; bottom: 20px; right: 20px; }
         }
 
         .reveal { visibility: hidden; }
@@ -221,7 +169,7 @@
 </head>
 <body>
 
-    <div class="music-control" id="musicBtn">🎵</div>
+    <div class="music-control" id="musicBtn"></div>
     <audio id="myAudio" loop>
         <source src="musica.mp3" type="audio/mpeg">
     </audio>
@@ -240,7 +188,7 @@
     <section class="section">
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.2rem;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздын құрметті қонағы болуға шақырамыз.</p>
         
         <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:4px; margin: 30px 0;" class="reveal">
 
@@ -256,12 +204,9 @@
 
         <div class="form-container reveal">
             <h2>Сауалнама</h2>
-            <p class="form-subtitle" style="font-family: 'Cassandra', serif !important; font-size: 1.6rem; margin-top: 10px;">Қатысуыңызды растап, форманы толтыруыңызды сұраймыз</p>
-            
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
                 <input type="text" name="тегі" required placeholder="Тегіңіз">
-                
                 <select name="жауап" id="attendance" required>
                     <option value="" disabled selected>Келесіз бе?</option>
                     <option value="Иә, келемін">Иә, келемін</option>
@@ -278,14 +223,14 @@
 
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет!</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет! Жауабыңыз қабылданды.</div>
         </div>
     </section>
 
     <script>
         ScrollReveal().reveal('.reveal', { delay: 300, distance: '50px', origin: 'bottom', interval: 200, duration: 1000 });
 
-        // Музыка
+        // Музыкальная логика
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         let isPlaying = false;
@@ -293,32 +238,26 @@
         musicBtn.addEventListener('click', () => {
             if (isPlaying) {
                 audio.pause();
-                musicBtn.innerText = '🎵';
                 musicBtn.classList.remove('playing');
             } else {
-                audio.play().catch(e => console.log("Ошибка: нужно взаимодействие", e));
-                musicBtn.innerText = '⏸️';
-                musicBtn.classList.add('playing');
+                audio.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(err => {
+                    console.log("Нужен клик для старта");
+                });
             }
             isPlaying = !isPlaying;
         });
 
-        // Логика формы
-        const attendanceSelect = document.getElementById('attendance');
-        const extraQuestion = document.getElementById('extra-question');
-
-        attendanceSelect.addEventListener('change', function() {
-            if (this.value === 'Иә, келемін') {
-                extraQuestion.style.display = 'block';
-            } else {
-                extraQuestion.style.display = 'none';
-            }
+        // Логика доп. вопроса в анкете
+        document.getElementById('attendance').addEventListener('change', function() {
+            document.getElementById('extra-question').style.display = (this.value === 'Иә, келемін') ? 'block' : 'none';
         });
 
-        // Отправка (замените URL на свой)
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec'
-        const form = document.getElementById('invite-form')
-        const btn = document.getElementById('submitBtn')
+        // ОТПРАВКА В ТАБЛИЦУ (Твоя проверенная ссылка)
+        const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
+        const form = document.getElementById('invite-form');
+        const btn = document.getElementById('submitBtn');
 
         form.addEventListener('submit', e => {
             e.preventDefault();
@@ -333,8 +272,8 @@
                     alert('Қате кетті!');
                     btn.disabled = false;
                     btn.innerText = 'Жіберу';
-                })
-        })
+                });
+        });
     </script>
 </body>
 </html>
