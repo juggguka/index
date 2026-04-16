@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    
     <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     
@@ -13,14 +12,11 @@
         @font-face {
             font-family: 'Cassandra';
             src: url('11 Cassandra.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
         }
         
         :root {
             --bg-color: #f5f5ef;
             --accent: #719279;
-            --text-dark: #2c2c2c;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -28,12 +24,10 @@
         body { 
             background-color: var(--bg-color); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--text-dark);
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* --- КНОПКА МУЗЫКИ --- */
+        /* --- Плеер --- */
         .music-control {
             position: fixed;
             bottom: 25px;
@@ -43,195 +37,153 @@
             height: 60px;
             border-radius: 50%;
             cursor: pointer;
-            background-color: white;
-            background-image: url('music-icon.png');
-            background-size: 60%;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: white url('music-icon.png') center/60% no-repeat;
             border: 3px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
 
-        @keyframes spin360 {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .playing { animation: spin 4s linear infinite; }
 
-        .playing { animation: spin360 4s linear infinite; box-shadow: 0 0 20px var(--accent); }
-
-        /* --- ГЛАВНАЯ СЕКЦИЯ С ПАРАЛЛАКСОМ --- */
-        #scene {
+        /* --- ГЛАВНЫЙ ЭКРАН (Исправленный параллакс) --- */
+        #hero-scene {
             position: relative;
             width: 100%;
             height: 100vh;
-            background-color: var(--bg-color);
-            overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: center; /* Центрирование содержимого */
+            align-items: center;
+            overflow: hidden;
+            background-color: var(--bg-color);
         }
 
-        /* Общий контейнер для слоев, чтобы центрировать текст */
         .layer {
+            position: absolute;
             width: 100%;
             height: 100%;
             display: flex;
             justify-content: center;
             align-items: center;
+        }
+
+        /* Слово ЖАС (Фон) */
+        .word-zhas {
+            font-family: 'Cassandra', serif;
+            font-size: 85vw;
+            color: var(--accent);
+            opacity: 0.12;
+            text-transform: uppercase;
+            line-height: 1;
             pointer-events: none;
         }
 
-        /* Слой 1: Слово ЖАС (Гигантское, на фоне) */
-        .layer-text-zhas {
-            z-index: 1;
-        }
-
-        .word-zhas {
-            font-family: 'Cassandra', serif !important;
-            font-size: 80vw; /* ГИГАНТСКОЕ слово */
-            color: var(--accent);
-            opacity: 0.2; /* Делаем его фоновым */
-            text-transform: uppercase; /* БОЛЬШИМИ БУКВАМИ */
-            line-height: 0.5;
-            display: block;
-            margin-top: -10vh; /* Смещение для композиции */
-        }
-
-        /* Слой 2: Число 60 (Аккуратное, по центру) */
-        .layer-text-60 {
-            z-index: 2;
-        }
-
+        /* Число 60 (Центр) */
         .num-60 {
-            font-family: 'Cassandra', serif !important;
-            font-size: 35vw; /* Уменьшили размер */
-            font-weight: 900;
+            font-family: 'Cassandra', serif;
+            font-size: 45vw;
             color: var(--accent);
-            line-height: 0.8;
-            display: block;
-            position: relative;
+            font-weight: 900;
+            pointer-events: none;
+            z-index: 5;
         }
 
-        /* Слой 3: Орнаменты */
-        .layer-ornament {
-            z-index: 3;
-        }
-
-        .ornament-img {
-            position: absolute;
-            width: 30vw;
-            opacity: 0.25;
-            filter: sepia(1) saturate(0.5) hue-rotate(60deg);
-        }
-
-        .orn-top-left { top: 8%; left: 8%; transform: rotate(0deg); }
-        .orn-bottom-right { bottom: 8%; right: 8%; transform: rotate(180deg); }
-
-        /* Слой 4: ФОТО МУЖЧИНЫ (Опущенно вниз) */
-        .layer-photo {
-            z-index: 10;
-            align-items: flex-end; /* Прижимаем фото к низу */
+        /* Фото мужчины */
+        .photo-layer {
+            align-items: flex-end; /* Прижимаем к низу */
         }
 
         .hero-photo {
-            height: 70vh; /* Опустили, уменьшив высоту */
+            height: 75vh;
             width: auto;
             object-fit: contain;
-            /* Растворение фото снизу */
+            z-index: 10;
+            pointer-events: none;
+            /* Плавное исчезновение снизу */
             -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
             mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            margin-bottom: -5vh; /* Легкое смещение вниз */
         }
 
-        /* --- ИНФО СЕКЦИЯ --- */
+        /* Орнаменты */
+        .ornament {
+            position: absolute;
+            width: 25vw;
+            opacity: 0.2;
+            pointer-events: none;
+        }
+
+        /* --- Секция контента --- */
         .section {
             padding: 80px 20px;
             text-align: center;
-            max-width: 800px;
-            margin: 0 auto;
+            background: var(--bg-color);
+            position: relative;
+            z-index: 20;
         }
 
-        .title-main { font-family: 'Cassandra', serif !important; font-size: 2.8rem; color: var(--accent); margin-bottom: 25px; }
+        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
         
         .info-grid {
             text-align: left;
-            margin: 40px auto;
+            margin: 30px auto;
             display: inline-block;
-            font-family: 'Cassandra', serif !important;
-            font-size: 2.2rem;
-            line-height: 1.4;
+            font-family: 'Cassandra', serif;
+            font-size: 2rem;
         }
-
-        .info-item b { color: var(--accent); font-weight: normal; }
 
         .btn-map { 
-            display: inline-block; padding: 16px 38px; background-color: var(--accent); 
-            color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 30px; 
-            box-shadow: 0 4px 15px rgba(113, 146, 121, 0.3);
+            display: inline-block; padding: 15px 30px; background: var(--accent); 
+            color: white; text-decoration: none; border-radius: 50px; font-weight: bold;
         }
 
-        /* --- ФОРМА --- */
-        .form-container { background: white; padding: 40px 20px; border-radius: 20px; box-shadow: 0 10px 40px rgba(0,0,0,0.04); margin-top: 60px; }
-        #extra-question { display: none; margin-top: 15px; border-left: 4px solid var(--accent); padding-left: 20px; text-align: left; }
-        input, select { width: 100%; padding: 18px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 8px; font-family: 'Montserrat', sans-serif; font-size: 1rem; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; text-transform: uppercase; border-radius: 8px; cursor: pointer; transition: 0.3s; }
-        .submit-btn:disabled { background: #ccc; }
+        .form-container { background: white; padding: 30px; border-radius: 20px; box-shadow: 0 5px 20px rgba(0,0,0,0.05); margin-top: 40px; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0; border: 1px solid #ddd; border-radius: 8px; }
+        .submit-btn { width: 100%; padding: 15px; background: var(--accent); color: white; border: none; border-radius: 8px; font-weight: bold; cursor: pointer; }
 
         @media (max-width: 600px) {
-            .num-60 { font-size: 45vw; } /* Чуть больше на мобильных */
-            .word-zhas { font-size: 100vw; margin-top: -5vh; } /* Гигантское на мобильных */
-            .info-grid { font-size: 1.7rem; }
-            .title-main { font-size: 2rem; }
-            .hero-photo { height: 65vh; } /* Опустили фото еще ниже на мобильных */
+            .num-60 { font-size: 60vw; }
+            .word-zhas { font-size: 110vw; }
+            .hero-photo { height: 70vh; }
         }
-
-        .reveal { visibility: hidden; }
     </style>
 </head>
 <body>
 
     <div class="music-control" id="musicBtn"></div>
-    <audio id="myAudio" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="myAudio" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
-    <div id="scene">
-        <div class="layer layer-text-zhas" data-depth="0.10">
-            <span class="word-zhas">ЖАС</span>
+    <div id="hero-scene">
+        <div class="layer" data-depth="0.1">
+            <h2 class="word-zhas">ЖАС</h2>
         </div>
 
-        <div class="layer layer-ornament" data-depth="0.60">
-            <img src="ornament.png" class="ornament-img orn-top-left" alt="u">
-            <img src="ornament.png" class="ornament-img orn-bottom-right" alt="u">
+        <div class="layer" data-depth="0.4">
+            <img src="ornament.png" class="ornament" style="top: 10%; left: 5%;" alt="">
+            <img src="ornament.png" class="ornament" style="bottom: 15%; right: 5%; transform: rotate(180deg);" alt="">
         </div>
 
-        <div class="layer layer-text-60" data-depth="0.30">
-            <span class="num-60">60</span>
+        <div class="layer" data-depth="0.2">
+            <h1 class="num-60">60</h1>
         </div>
 
-        <div class="layer layer-photo" data-depth="0.20">
-            <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
+        <div class="layer photo-layer" data-depth="0.15">
+            <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" class="hero-photo" alt="">
         </div>
     </div>
 
     <section class="section">
-        <p class="reveal" style="letter-spacing: 4px; font-size: 1.1rem; color: var(--accent); font-weight: bold;">ШАҚЫРТУ</p>
-        <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p class="reveal" style="font-size: 1.1rem; line-height: 1.7;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <h1 class="title-main">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
+        <p>мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <div class="info-grid reveal">
-            <div class="info-item"><b>Той иелері:</b> жары мен балалары</div>
-            <div class="info-item"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
-            <div class="info-item"><b>Адресі:</b> Б.Момышұлы-2/4</div>
-            <div class="info-item"><b>Уақыты:</b> 2-шілде 2026-жыл, сағ. 17:00</div>
+        <div class="info-grid">
+            <p><b>Той иелері:</b> жары мен балалары</p>
+            <p><b>Той орны:</b> “Бәйтерек” банкет залы</p>
+            <p><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</p>
         </div>
-
         <br>
-        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
+        <a href="https://2gis.kz/astana/firm/70000001083013833" class="btn-map">КАРТАДАН ҚАРАУ</a>
 
-        <div class="form-container reveal">
-            <h2 style="font-size: 1.5rem; margin-bottom: 10px;">САУАЛНАМА</h2>
-            <p style="font-family: 'Cassandra', serif !important; font-size: 1.8rem; color: var(--accent); margin-bottom: 20px;">Қатысуыңызды растауыңызды сұраймыз</p>
+        <div class="form-container">
+            <h2>Сауалнама</h2>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
                 <input type="text" name="тегі" required placeholder="Тегіңіз">
@@ -240,74 +192,44 @@
                     <option value="Иә, келемін">Иә, келемін</option>
                     <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
                 </select>
-
-                <div id="extra-question">
-                    <p style="margin-bottom: 10px; font-weight: bold;">Жалғыз келесіз бе әлде жұбыңызбен бе?</p>
+                <div id="extra" style="display:none">
                     <select name="кіммен">
                         <option value="Жалғыз">Жалғыз келемін</option>
                         <option value="Жұбыммен">Жұбыммен келемін</option>
                     </select>
                 </div>
-
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:25px; color: var(--accent); font-weight: bold; font-size: 1.2rem;">Рахмет! Жауабыңыз қабылданды.</div>
+            <p id="msg" style="display:none; color: var(--accent); margin-top:20px;">Рахмет! Жауап қабылданды.</p>
         </div>
     </section>
 
     <script>
-        // Инициализация параллакса
-        var scene = document.getElementById('scene');
-        var parallaxInstance = new Parallax(scene, {
-            relativeInput: true,
-            hoverOnly: false, // Чтобы работало от наклона телефона
-            pointerEvents: true
-        });
-
-        // Анимации появления
-        ScrollReveal().reveal('.reveal', { delay: 200, distance: '40px', origin: 'bottom', interval: 150, duration: 1000 });
+        // Запуск параллакса
+        var scene = document.getElementById('hero-scene');
+        var parallaxInstance = new Parallax(scene);
 
         // Музыка
         const audio = document.getElementById('myAudio');
-        const musicBtn = document.getElementById('musicBtn');
-        let isPlaying = false;
-
-        musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
-                audio.pause();
-                musicBtn.classList.remove('playing');
-            } else {
-                audio.play().then(() => {
-                    musicBtn.classList.add('playing');
-                }).catch(err => console.log("Нужен клик"));
-            }
-            isPlaying = !isPlaying;
+        const btn = document.getElementById('musicBtn');
+        btn.addEventListener('click', () => {
+            if (audio.paused) { audio.play(); btn.classList.add('playing'); }
+            else { audio.pause(); btn.classList.remove('playing'); }
         });
 
         // Анкета
-        document.getElementById('attendance').addEventListener('change', function() {
-            document.getElementById('extra-question').style.display = (this.value === 'Иә, келемін') ? 'block' : 'none';
-        });
+        document.getElementById('attendance').onchange = function() {
+            document.getElementById('extra').style.display = this.value === 'Иә, келемін' ? 'block' : 'none';
+        };
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
-        const btn = document.getElementById('submitBtn');
-
-        form.addEventListener('submit', e => {
+        form.onsubmit = e => {
             e.preventDefault();
-            btn.disabled = true;
-            btn.innerText = 'Жіберілуде...';
+            document.getElementById('submitBtn').disabled = true;
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(() => {
-                    form.style.display = 'none';
-                    document.getElementById('msg').style.display = 'block';
-                })
-                .catch(() => {
-                    alert('Қате кетті!');
-                    btn.disabled = false;
-                    btn.innerText = 'Жіберу';
-                });
-        });
+            .then(() => { form.style.display = 'none'; document.getElementById('msg').style.display = 'block'; });
+        };
     </script>
 </body>
 </html>
