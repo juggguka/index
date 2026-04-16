@@ -59,7 +59,7 @@
 
         .playing { animation: spin360 4s linear infinite; box-shadow: 0 0 20px var(--accent); }
 
-        /* --- ПАРАЛЛАКС СЕКЦИЯ (ГЛАВНАЯ) --- */
+        /* --- ГЛАВНАЯ СЕКЦИЯ С ПАРАЛЛАКСОМ --- */
         #scene {
             position: relative;
             width: 100%;
@@ -68,68 +68,79 @@
             overflow: hidden;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* Центрирование содержимого */
         }
 
-        /* Слой с числом 60 и словом Жас */
-        .layer-text {
+        /* Общий контейнер для слоев, чтобы центрировать текст */
+        .layer {
             width: 100%;
-            text-align: center;
+            height: 100%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
             pointer-events: none;
         }
 
-        .num-60 {
-            font-family: 'Cassandra', serif !important;
-            font-size: 55vw;
-            font-weight: 900;
-            color: var(--accent);
-            line-height: 0.7;
-            display: block;
+        /* Слой 1: Слово ЖАС (Гигантское, на фоне) */
+        .layer-text-zhas {
+            z-index: 1;
         }
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
-            font-size: 22vw;
+            font-size: 80vw; /* ГИГАНТСКОЕ слово */
             color: var(--accent);
+            opacity: 0.2; /* Делаем его фоновым */
+            text-transform: uppercase; /* БОЛЬШИМИ БУКВАМИ */
+            line-height: 0.5;
             display: block;
-            margin-top: -5vw;
+            margin-top: -10vh; /* Смещение для композиции */
         }
 
-        /* Слой с орнаментами */
+        /* Слой 2: Число 60 (Аккуратное, по центру) */
+        .layer-text-60 {
+            z-index: 2;
+        }
+
+        .num-60 {
+            font-family: 'Cassandra', serif !important;
+            font-size: 35vw; /* Уменьшили размер */
+            font-weight: 900;
+            color: var(--accent);
+            line-height: 0.8;
+            display: block;
+            position: relative;
+        }
+
+        /* Слой 3: Орнаменты */
         .layer-ornament {
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
+            z-index: 3;
         }
 
         .ornament-img {
             position: absolute;
-            width: 40vw;
-            opacity: 0.3;
-            filter: sepia(1) saturate(0.5) hue-rotate(60deg); /* Подгоняем под цвет акцента */
+            width: 30vw;
+            opacity: 0.25;
+            filter: sepia(1) saturate(0.5) hue-rotate(60deg);
         }
 
-        .orn-top-left { top: 5%; left: 5%; transform: rotate(0deg); }
-        .orn-bottom-right { bottom: 5%; right: 5%; transform: rotate(180deg); }
+        .orn-top-left { top: 8%; left: 8%; transform: rotate(0deg); }
+        .orn-bottom-right { bottom: 8%; right: 8%; transform: rotate(180deg); }
 
-        /* Слой с ФОТО (ПОВЕРХ ТЕКСТА) */
+        /* Слой 4: ФОТО МУЖЧИНЫ (Опущенно вниз) */
         .layer-photo {
-            width: 100%;
-            height: 100vh;
-            display: flex;
-            justify-content: center;
-            align-items: flex-end;
             z-index: 10;
-            pointer-events: none;
+            align-items: flex-end; /* Прижимаем фото к низу */
         }
 
         .hero-photo {
-            height: 80vh;
+            height: 70vh; /* Опустили, уменьшив высоту */
             width: auto;
             object-fit: contain;
             /* Растворение фото снизу */
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            margin-bottom: -5vh; /* Легкое смещение вниз */
         }
 
         /* --- ИНФО СЕКЦИЯ --- */
@@ -167,11 +178,11 @@
         .submit-btn:disabled { background: #ccc; }
 
         @media (max-width: 600px) {
-            .num-60 { font-size: 90vw; }
-            .word-zhas { font-size: 30vw; }
+            .num-60 { font-size: 45vw; } /* Чуть больше на мобильных */
+            .word-zhas { font-size: 100vw; margin-top: -5vh; } /* Гигантское на мобильных */
             .info-grid { font-size: 1.7rem; }
             .title-main { font-size: 2rem; }
-            .hero-photo { height: 75vh; }
+            .hero-photo { height: 65vh; } /* Опустили фото еще ниже на мобильных */
         }
 
         .reveal { visibility: hidden; }
@@ -185,17 +196,20 @@
     </audio>
 
     <div id="scene">
+        <div class="layer layer-text-zhas" data-depth="0.10">
+            <span class="word-zhas">ЖАС</span>
+        </div>
+
         <div class="layer layer-ornament" data-depth="0.60">
             <img src="ornament.png" class="ornament-img orn-top-left" alt="u">
             <img src="ornament.png" class="ornament-img orn-bottom-right" alt="u">
         </div>
 
-        <div class="layer layer-text" data-depth="0.30">
+        <div class="layer layer-text-60" data-depth="0.30">
             <span class="num-60">60</span>
-            <span class="word-zhas">Жас</span>
         </div>
 
-        <div class="layer layer-photo" data-depth="0.10">
+        <div class="layer layer-photo" data-depth="0.20">
             <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
         </div>
     </div>
@@ -205,10 +219,6 @@
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
         <p class="reveal" style="font-size: 1.1rem; line-height: 1.7;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <div class="reveal" style="margin: 40px 0;">
-            <img src="ornament.png" style="width: 80px; filter: invert(58%) sepia(12%) saturate(765%) hue-rotate(85deg) brightness(91%) contrast(85%);">
-        </div>
-
         <div class="info-grid reveal">
             <div class="info-item"><b>Той иелері:</b> жары мен балалары</div>
             <div class="info-item"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
@@ -250,7 +260,7 @@
         var scene = document.getElementById('scene');
         var parallaxInstance = new Parallax(scene, {
             relativeInput: true,
-            hoverOnly: false, // Чтобы работало от наклона телефона (гироскоп)
+            hoverOnly: false, // Чтобы работало от наклона телефона
             pointerEvents: true
         });
 
@@ -267,8 +277,9 @@
                 audio.pause();
                 musicBtn.classList.remove('playing');
             } else {
-                audio.play();
-                musicBtn.classList.add('playing');
+                audio.play().then(() => {
+                    musicBtn.classList.add('playing');
+                }).catch(err => console.log("Нужен клик"));
             }
             isPlaying = !isPlaying;
         });
