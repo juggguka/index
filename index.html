@@ -5,6 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
+    <!-- Подключаем ScrollReveal заново для уверенности -->
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
@@ -49,7 +50,7 @@
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center; /* Центровка контейнера с текстом */
+            align-items: center;
             background-color: var(--bg-color);
             overflow: hidden;
         }
@@ -60,7 +61,7 @@
             flex-direction: column;
             align-items: center;
             z-index: 1;
-            margin-top: -15vh; /* ПОДНИМАЕМ ТЕКСТ ВЫШЕ */
+            margin-top: -18vh; /* Число 60 и ЖАС еще выше */
         }
 
         .num-60 {
@@ -83,12 +84,12 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 70vh; /* УМЕНЬШИЛИ ВЫСОТУ ФОТО */
+            height: 70vh;
             z-index: 2;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-bottom: -2vh; /* ОПУСТИЛИ МУЖЧИНУ НИЖЕ */
+            margin-bottom: -5vh; /* Опустили мужчину еще ниже */
         }
 
         .hero-photo {
@@ -99,28 +100,64 @@
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        /* Контентная часть */
+        /* СЕКЦИЯ С ТЕКСТОМ */
         .section {
-            padding: 60px 20px;
+            padding: 80px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            background-color: var(--bg-color);
         }
-        .title-main { font-family: 'Cassandra', serif !important; font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
-        .info-grid { font-family: 'Cassandra', serif !important; font-size: 2rem; line-height: 1.4; margin: 40px 0; text-align: left; display: inline-block; }
-        .btn-map { display: inline-block; padding: 15px 35px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; }
-        
-        .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
-        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; }
 
+        .title-main { 
+            font-family: 'Cassandra', serif !important; 
+            font-size: 2.5rem; 
+            color: var(--accent); 
+            margin: 20px 0; 
+        }
+
+        .info-grid { 
+            font-family: 'Cassandra', serif !important; 
+            font-size: 2rem; 
+            line-height: 1.5; 
+            margin: 40px 0; 
+            text-align: left; 
+            display: inline-block; 
+        }
+
+        .info-grid b { color: var(--accent); }
+
+        .btn-map { 
+            display: inline-block; 
+            padding: 18px 40px; 
+            background: var(--accent); 
+            color: white; 
+            text-decoration: none; 
+            border-radius: 50px; 
+            font-weight: bold; 
+            margin: 20px 0;
+        }
+
+        .form-container { 
+            background: white; 
+            padding: 40px 20px; 
+            border-radius: 20px; 
+            box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
+            margin-top: 50px; 
+        }
+
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; }
+
+        /* Если скрипт не загрузится, текст все равно будет видно через 1 секунду */
+        .reveal { visibility: hidden; }
+        
         @media (max-width: 600px) {
             .num-60 { font-size: 65vw; }
             .word-zhas { font-size: 22vw; }
-            .hero-bg-text { margin-top: -20vh; }
-            .hero-photo-container { height: 65vh; }
+            .title-main { font-size: 1.8rem; }
+            .info-grid { font-size: 1.5rem; }
         }
-        .reveal { visibility: hidden; }
     </style>
 </head>
 <body>
@@ -138,23 +175,26 @@
         </div>
     </section>
 
+    <!-- ВОТ ТВОЙ ПРОПАВШИЙ ТЕКСТ -->
     <section class="section">
-        <h1 class="title-main reveal">Берік Ғалымұлының мерейтойы</h1>
-        <p class="reveal">Сіздерді 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
+        <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
+        <p class="reveal" style="font-size: 1.2rem;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:10px; margin: 30px 0;" class="reveal">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:15px; margin: 40px 0;" class="reveal">
 
         <div class="info-grid reveal">
+            <div><b>Той иелері:</b> жары мен балалары</div>
             <div><b>Той орны:</b> “Бәйтерек” банкет залы</div>
             <div><b>Адресі:</b> Б.Момышұлы-2/4</div>
-            <div><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
+            <div><b>Уақыты:</b> 2-шілде 2026-жыл, сағат 17:00</div>
         </div>
 
         <br>
         <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
 
         <div class="form-container reveal">
-            <h2>Сауалнама</h2>
+            <h2 style="margin-bottom: 20px;">САУАЛНАМА</h2>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
                 <input type="text" name="тегі" required placeholder="Тегіңіз">
@@ -163,22 +203,37 @@
                     <option value="Иә, келемін">Иә, келемін</option>
                     <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
                 </select>
-                <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
+                <button type="submit" class="submit-btn" id="submitBtn">ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды!</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды! Рахмет.</div>
         </div>
     </section>
 
     <script>
-        ScrollReveal().reveal('.reveal', { delay: 200, distance: '30px', origin: 'bottom', interval: 100 });
+        // Инициализация анимации появления
+        window.sr = ScrollReveal();
+        sr.reveal('.reveal', { 
+            delay: 200, 
+            distance: '50px', 
+            origin: 'bottom', 
+            duration: 1000,
+            viewFactor: 0.2 
+        });
 
+        // Музыка
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         musicBtn.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); musicBtn.classList.add('playing'); }
-            else { audio.pause(); musicBtn.classList.remove('playing'); }
+            if (audio.paused) {
+                audio.play();
+                musicBtn.classList.add('playing');
+            } else {
+                audio.pause();
+                musicBtn.classList.remove('playing');
+            }
         });
 
+        // Форма
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
         form.addEventListener('submit', e => {
@@ -194,6 +249,7 @@
                 .catch(() => {
                     alert('Қате кетті!');
                     btn.disabled = false;
+                    btn.innerText = 'ЖІБЕРУ';
                 });
         });
     </script>
