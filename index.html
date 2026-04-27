@@ -46,13 +46,13 @@
         @keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .playing { animation: spin360 4s linear infinite; }
 
-        /* --- ОБЩАЯ АНИМАЦИЯ ВРАЩЕНИЯ ФОНА --- */
+        /* --- АНИМАЦИИ --- */
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
-        /* ГЛАВНЫЙ ФОНОВЫЙ ОРНАМЕНТ (Общий на весь сайт) */
+        /* ГЛАВНЫЙ ФОНОВЫЙ ОРНАМЕНТ */
         .bg-fixed-ornament {
             position: fixed;
             top: 25%;
@@ -66,7 +66,7 @@
             animation: slowRotate 60s linear infinite;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
         .hero {
             height: 100vh;
             position: relative;
@@ -129,7 +129,6 @@
             z-index: 20;
         }
 
-        /* Дополнительные маленькие орнаменты в секции инфо */
         .side-ornament {
             position: absolute;
             width: 30vw;
@@ -137,7 +136,7 @@
             opacity: 0.06;
             z-index: -1;
             pointer-events: none;
-            animation: slowRotate 40s linear infinite reverse; /* В другую сторону крутится */
+            animation: slowRotate 40s linear infinite reverse;
         }
         .orn-1 { top: 10%; left: -10%; }
         .orn-2 { bottom: 20%; right: -10%; }
@@ -166,8 +165,38 @@
             text-decoration: none; 
             border-radius: 50px; 
             font-weight: bold; 
+            margin-bottom: 40px;
         }
 
+        /* --- ТАЙМЕР --- */
+        .timer-container {
+            margin: 40px auto;
+            display: flex;
+            justify-content: center;
+            gap: 15px;
+        }
+        .timer-item {
+            background: white;
+            padding: 15px;
+            border-radius: 12px;
+            min-width: 80px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            border: 1px solid rgba(113, 146, 121, 0.1);
+        }
+        .timer-val {
+            display: block;
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: var(--accent);
+        }
+        .timer-label {
+            font-size: 0.7rem;
+            color: #888;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+        }
+
+        /* --- ФОРМА --- */
         .form-container { 
             background: rgba(255, 255, 255, 0.9); 
             padding: 40px 20px; 
@@ -175,7 +204,6 @@
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
             margin-top: 50px; 
         }
-
         input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; }
         .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; }
 
@@ -186,12 +214,13 @@
             .word-zhas { font-size: 22vw; }
             .title-main { font-size: 1.8rem; }
             .info-grid { font-size: 1.5rem; }
+            .timer-item { min-width: 70px; padding: 10px; }
+            .timer-val { font-size: 1.4rem; }
         }
     </style>
 </head>
 <body>
 
-    <!-- Главный орнамент, который не обрывается -->
     <img src="ornament.png" class="bg-fixed-ornament" alt="">
 
     <div class="music-control" id="musicBtn"></div>
@@ -208,12 +237,11 @@
     </section>
 
     <section class="section">
-        <!-- Маленькие орнаменты для второй страницы -->
         <img src="ornament.png" class="side-ornament orn-1" alt="">
         <img src="ornament.png" class="side-ornament orn-2" alt="">
 
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
-        <h1 class="title-main reveal">Асқар тау әкеміз - Берік Ғалымұлының</h1>
+        <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
         <p class="reveal" style="font-size: 1.2rem;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
         <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:15px; margin: 40px 0;" class="reveal">
@@ -228,6 +256,26 @@
         <br>
         <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
 
+        <!-- ТАЙМЕР -->
+        <div class="timer-container reveal">
+            <div class="timer-item">
+                <span class="timer-val" id="days">00</span>
+                <span class="timer-label">күн</span>
+            </div>
+            <div class="timer-item">
+                <span class="timer-val" id="hours">00</span>
+                <span class="timer-label">сағат</span>
+            </div>
+            <div class="timer-item">
+                <span class="timer-val" id="minutes">00</span>
+                <span class="timer-label">мин</span>
+            </div>
+            <div class="timer-item">
+                <span class="timer-val" id="seconds">00</span>
+                <span class="timer-label">сек</span>
+            </div>
+        </div>
+
         <div class="form-container reveal">
             <h2 style="margin-bottom: 20px; color: var(--accent);">САУАЛНАМА</h2>
             <form id="invite-form">
@@ -240,14 +288,16 @@
                 </select>
                 <button type="submit" class="submit-btn" id="submitBtn">ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды!</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды! Рахмет.</div>
         </div>
     </section>
 
     <script>
+        // Анимация появления
         window.sr = ScrollReveal();
         sr.reveal('.reveal', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
 
+        // Музыка
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         musicBtn.addEventListener('click', () => {
@@ -255,6 +305,26 @@
             else { audio.pause(); musicBtn.classList.remove('playing'); }
         });
 
+        // Таймер обратного отсчета
+        function updateTimer() {
+            const targetDate = new Date("July 2, 2026 17:00:00").getTime();
+            const now = new Date().getTime();
+            const diff = targetDate - now;
+            if (diff > 0) {
+                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
+                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
+                const s = Math.floor((diff % (1000 * 60)) / 1000);
+                document.getElementById("days").innerText = d < 10 ? "0"+d : d;
+                document.getElementById("hours").innerText = h < 10 ? "0"+h : h;
+                document.getElementById("minutes").innerText = m < 10 ? "0"+m : m;
+                document.getElementById("seconds").innerText = s < 10 ? "0"+s : s;
+            }
+        }
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // Форма
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
         form.addEventListener('submit', e => {
@@ -264,7 +334,7 @@
             btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(() => { form.style.display = 'none'; document.getElementById('msg').style.display = 'block'; })
-                .catch(() => { alert('Қате!'); btn.disabled = false; });
+                .catch(() => { alert('Қате кетті!'); btn.disabled = false; });
         });
     </script>
 </body>
