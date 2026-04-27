@@ -174,7 +174,104 @@
             <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
         </div>
     </section>
+<style>
+    /* Анимация вращения */
+    @keyframes slowRotate {
+        from { transform: rotate(0deg); }
+        to { transform: rotate(360deg); }
+    }
 
+    .hero {
+        height: 100vh;
+        position: relative;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        background-color: var(--bg-color);
+        overflow: hidden;
+    }
+
+    .hero-bg-text {
+        position: relative;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        z-index: 1;
+        margin-top: -18vh; 
+    }
+
+    /* Стиль для вращающегося орнамента */
+    .bg-ornament {
+        position: absolute;
+        width: 120vw; /* Делаем его больше экрана, чтобы он был фоном */
+        max-width: 1000px; /* Ограничим на больших экранах */
+        opacity: 0.07; /* Почти прозрачный (измени на 0.1 если слишком бледно) */
+        z-index: -1; /* За цифрами */
+        top: 50%;
+        left: 50%;
+        /* Центрируем и запускаем вращение */
+        transform-origin: center center;
+        animation: slowRotate 50s linear infinite; 
+        pointer-events: none;
+    }
+
+    .num-60 {
+        font-family: 'Cassandra', serif !important;
+        font-size: 50vw; 
+        font-weight: 900;
+        color: var(--accent);
+        line-height: 0.8;
+        position: relative;
+    }
+
+    .word-zhas {
+        font-family: 'Cassandra', serif !important;
+        font-size: 15vw;
+        color: var(--accent);
+        text-transform: uppercase;
+        margin-top: -2vw;
+    }
+
+    .hero-photo-container {
+        position: absolute;
+        bottom: 0;
+        width: 100%;
+        height: 70vh;
+        z-index: 2;
+        display: flex;
+        justify-content: center;
+        align-items: flex-end;
+        margin-bottom: -5vh;
+    }
+
+    .hero-photo {
+        height: 100%;
+        width: auto;
+        object-fit: contain;
+        -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+        mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+    }
+
+    @media (max-width: 600px) {
+        .bg-ornament { width: 150vw; } /* На мобилках покрупнее */
+        .num-60 { font-size: 65vw; }
+        .word-zhas { font-size: 22vw; }
+    }
+</style>
+
+<!-- Исправленный HTML блок -->
+<section class="hero">
+    <div class="hero-bg-text">
+        <!-- Твой орнамент (замени ornament.png на свое название файла) -->
+        <img src="ornament.png" class="bg-ornament" alt="">
+        
+        <span class="num-60">60</span>
+        <span class="word-zhas">ЖАС</span>
+    </div>
+    <div class="hero-photo-container">
+        <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
+    </div>
+</section>
     <!-- ВОТ ТВОЙ ПРОПАВШИЙ ТЕКСТ -->
     <section class="section">
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
