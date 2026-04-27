@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <!-- Подключаем ScrollReveal заново для уверенности -->
     <script src="https://unpkg.com/scrollreveal"></script>
     
     <style>
@@ -17,6 +16,7 @@
         :root {
             --bg-color: #f5f5ef;
             --accent: #719279;
+            --text-dark: #2c2c2c;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -24,10 +24,12 @@
         body { 
             background-color: var(--bg-color); 
             font-family: 'Montserrat', sans-serif; 
+            color: var(--text-dark);
             overflow-x: hidden;
+            scroll-behavior: smooth;
         }
 
-        /* Кнопка музыки */
+        /* --- КНОПКА МУЗЫКИ --- */
         .music-control {
             position: fixed;
             bottom: 25px;
@@ -41,10 +43,20 @@
             border: 3px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
-        .playing { animation: spin 4s linear infinite; }
 
-        /* ГЛАВНЫЙ ЭКРАН */
+        @keyframes spin360 {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+        .playing { animation: spin360 4s linear infinite; }
+
+        /* --- АНИМАЦИЯ ВРАЩЕНИЯ ОРНАМЕНТА --- */
+        @keyframes slowRotate {
+            from { transform: rotate(0deg); }
+            to { transform: rotate(360deg); }
+        }
+
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
         .hero {
             height: 100vh;
             position: relative;
@@ -60,8 +72,23 @@
             display: flex;
             flex-direction: column;
             align-items: center;
+            text-align: center;
             z-index: 1;
-            margin-top: -18vh; /* Число 60 и ЖАС еще выше */
+            margin-top: -18vh; /* Подняли число 60 и ЖАС выше */
+        }
+
+        /* Фоновый вращающийся орнамент */
+        .bg-ornament {
+            position: absolute;
+            width: 120vw;
+            max-width: 900px;
+            opacity: 0.08; /* Легкая прозрачность */
+            z-index: -1;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            animation: slowRotate 50s linear infinite;
+            pointer-events: none;
         }
 
         .num-60 {
@@ -84,29 +111,28 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 70vh;
+            height: 70vh; 
             z-index: 2;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-bottom: -5vh; /* Опустили мужчину еще ниже */
+            margin-bottom: -5vh; /* Опустили фото мужчины ниже */
         }
 
         .hero-photo {
             height: 100%;
             width: auto;
             object-fit: contain;
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
-        /* СЕКЦИЯ С ТЕКСТОМ */
+        /* --- КОНТЕНТНАЯ СЕКЦИЯ --- */
         .section {
             padding: 80px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
-            background-color: var(--bg-color);
         }
 
         .title-main { 
@@ -136,6 +162,7 @@
             border-radius: 50px; 
             font-weight: bold; 
             margin: 20px 0;
+            transition: 0.3s;
         }
 
         .form-container { 
@@ -146,17 +173,17 @@
             margin-top: 50px; 
         }
 
-        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; font-family: 'Montserrat', sans-serif; }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
 
-        /* Если скрипт не загрузится, текст все равно будет видно через 1 секунду */
         .reveal { visibility: hidden; }
-        
+
         @media (max-width: 600px) {
             .num-60 { font-size: 65vw; }
             .word-zhas { font-size: 22vw; }
             .title-main { font-size: 1.8rem; }
             .info-grid { font-size: 1.5rem; }
+            .bg-ornament { width: 150vw; }
         }
     </style>
 </head>
@@ -167,6 +194,9 @@
 
     <section class="hero">
         <div class="hero-bg-text">
+            <!-- Вращающийся орнамент -->
+            <img src="ornament.png" class="bg-ornament" alt="">
+            
             <span class="num-60">60</span>
             <span class="word-zhas">ЖАС</span>
         </div>
@@ -174,105 +204,7 @@
             <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
         </div>
     </section>
-<style>
-    /* Анимация вращения */
-    @keyframes slowRotate {
-        from { transform: rotate(0deg); }
-        to { transform: rotate(360deg); }
-    }
 
-    .hero {
-        height: 100vh;
-        position: relative;
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        background-color: var(--bg-color);
-        overflow: hidden;
-    }
-
-    .hero-bg-text {
-        position: relative;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        z-index: 1;
-        margin-top: -18vh; 
-    }
-
-    /* Стиль для вращающегося орнамента */
-    .bg-ornament {
-        position: absolute;
-        width: 120vw; /* Делаем его больше экрана, чтобы он был фоном */
-        max-width: 1000px; /* Ограничим на больших экранах */
-        opacity: 0.07; /* Почти прозрачный (измени на 0.1 если слишком бледно) */
-        z-index: -1; /* За цифрами */
-        top: 50%;
-        left: 50%;
-        /* Центрируем и запускаем вращение */
-        transform-origin: center center;
-        animation: slowRotate 50s linear infinite; 
-        pointer-events: none;
-    }
-
-    .num-60 {
-        font-family: 'Cassandra', serif !important;
-        font-size: 50vw; 
-        font-weight: 900;
-        color: var(--accent);
-        line-height: 0.8;
-        position: relative;
-    }
-
-    .word-zhas {
-        font-family: 'Cassandra', serif !important;
-        font-size: 15vw;
-        color: var(--accent);
-        text-transform: uppercase;
-        margin-top: -2vw;
-    }
-
-    .hero-photo-container {
-        position: absolute;
-        bottom: 0;
-        width: 100%;
-        height: 70vh;
-        z-index: 2;
-        display: flex;
-        justify-content: center;
-        align-items: flex-end;
-        margin-bottom: -5vh;
-    }
-
-    .hero-photo {
-        height: 100%;
-        width: auto;
-        object-fit: contain;
-        -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-        mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-    }
-
-    @media (max-width: 600px) {
-        .bg-ornament { width: 150vw; } /* На мобилках покрупнее */
-        .num-60 { font-size: 65vw; }
-        .word-zhas { font-size: 22vw; }
-    }
-</style>
-
-<!-- Исправленный HTML блок -->
-<section class="hero">
-    <div class="hero-bg-text">
-        <!-- Твой орнамент (замени ornament.png на свое название файла) -->
-        <img src="ornament.png" class="bg-ornament" alt="">
-        
-        <span class="num-60">60</span>
-        <span class="word-zhas">ЖАС</span>
-    </div>
-    <div class="hero-photo-container">
-        <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
-    </div>
-</section>
-    <!-- ВОТ ТВОЙ ПРОПАВШИЙ ТЕКСТ -->
     <section class="section">
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
@@ -291,7 +223,7 @@
         <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
 
         <div class="form-container reveal">
-            <h2 style="margin-bottom: 20px;">САУАЛНАМА</h2>
+            <h2 style="margin-bottom: 20px; color: var(--accent);">САУАЛНАМА</h2>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
                 <input type="text" name="тегі" required placeholder="Тегіңіз">
@@ -302,12 +234,12 @@
                 </select>
                 <button type="submit" class="submit-btn" id="submitBtn">ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды! Рахмет.</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold; font-size: 1.2rem;">Жауабыңыз қабылданды! Рахмет.</div>
         </div>
     </section>
 
     <script>
-        // Инициализация анимации появления
+        // Инициализация анимации ScrollReveal
         window.sr = ScrollReveal();
         sr.reveal('.reveal', { 
             delay: 200, 
@@ -317,7 +249,7 @@
             viewFactor: 0.2 
         });
 
-        // Музыка
+        // Логика музыки
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         musicBtn.addEventListener('click', () => {
@@ -330,7 +262,7 @@
             }
         });
 
-        // Форма
+        // Отправка формы в Google Таблицу
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
         form.addEventListener('submit', e => {
