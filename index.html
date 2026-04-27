@@ -11,14 +11,11 @@
         @font-face {
             font-family: 'Cassandra';
             src: url('11 Cassandra.ttf') format('truetype');
-            font-weight: normal;
-            font-style: normal;
         }
         
         :root {
             --bg-color: #f5f5ef;
             --accent: #719279;
-            --text-dark: #2c2c2c;
         }
 
         * { margin: 0; padding: 0; box-sizing: border-box; }
@@ -26,12 +23,10 @@
         body { 
             background-color: var(--bg-color); 
             font-family: 'Montserrat', sans-serif; 
-            color: var(--text-dark);
             overflow-x: hidden;
-            scroll-behavior: smooth;
         }
 
-        /* --- КНОПКА МУЗЫКИ --- */
+        /* Кнопка музыки */
         .music-control {
             position: fixed;
             bottom: 25px;
@@ -45,38 +40,32 @@
             border: 3px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
+        @keyframes spin { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
+        .playing { animation: spin 4s linear infinite; }
 
-        @keyframes spin360 {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
-
-        .playing { animation: spin360 4s linear infinite; }
-
-        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        /* ГЛАВНЫЙ ЭКРАН */
         .hero {
             height: 100vh;
             position: relative;
             display: flex;
             justify-content: center;
-            align-items: center;
+            align-items: center; /* Центровка контейнера с текстом */
             background-color: var(--bg-color);
             overflow: hidden;
         }
 
         .hero-bg-text {
-            position: absolute;
+            position: relative;
             display: flex;
             flex-direction: column;
             align-items: center;
-            text-align: center;
             z-index: 1;
-            width: 100%;
+            margin-top: -15vh; /* ПОДНИМАЕМ ТЕКСТ ВЫШЕ */
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 50vw; /* Половина ширины экрана */
+            font-size: 50vw; 
             font-weight: 900;
             color: var(--accent);
             line-height: 0.8;
@@ -86,7 +75,7 @@
             font-family: 'Cassandra', serif !important;
             font-size: 15vw;
             color: var(--accent);
-            text-transform: uppercase; /* Всегда заглавными */
+            text-transform: uppercase;
             margin-top: -2vw;
         }
 
@@ -94,57 +83,43 @@
             position: absolute;
             bottom: 0;
             width: 100%;
-            height: 80vh; 
-            z-index: 2; /* Поверх текста */
+            height: 70vh; /* УМЕНЬШИЛИ ВЫСОТУ ФОТО */
+            z-index: 2;
             display: flex;
             justify-content: center;
             align-items: flex-end;
+            margin-bottom: -2vh; /* ОПУСТИЛИ МУЖЧИНУ НИЖЕ */
         }
 
         .hero-photo {
             height: 100%;
             width: auto;
             object-fit: contain;
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        /* --- КОНТЕНТ --- */
+        /* Контентная часть */
         .section {
             padding: 60px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
         }
-
         .title-main { font-family: 'Cassandra', serif !important; font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
+        .info-grid { font-family: 'Cassandra', serif !important; font-size: 2rem; line-height: 1.4; margin: 40px 0; text-align: left; display: inline-block; }
+        .btn-map { display: inline-block; padding: 15px 35px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: bold; }
         
-        .info-grid {
-            text-align: left;
-            margin: 40px auto;
-            display: inline-block;
-            font-family: 'Cassandra', serif !important;
-            font-size: 2rem;
-            line-height: 1.4;
-        }
-
-        .btn-map { 
-            display: inline-block; padding: 15px 35px; background-color: var(--accent); 
-            color: white; text-decoration: none; border-radius: 50px; font-weight: bold; margin-top: 20px; 
-        }
-
-        /* --- ФОРМА --- */
         .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
         input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; }
         .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; }
 
         @media (max-width: 600px) {
-            .num-60 { font-size: 70vw; }
-            .word-zhas { font-size: 25vw; }
-            .info-grid { font-size: 1.5rem; }
-            .title-main { font-size: 1.8rem; }
+            .num-60 { font-size: 65vw; }
+            .word-zhas { font-size: 22vw; }
+            .hero-bg-text { margin-top: -20vh; }
+            .hero-photo-container { height: 65vh; }
         }
-
         .reveal { visibility: hidden; }
     </style>
 </head>
@@ -164,14 +139,12 @@
     </section>
 
     <section class="section">
-        <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem;">СІЗДЕРДІ</p>
-        <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p class="reveal">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <h1 class="title-main reveal">Берік Ғалымұлының мерейтойы</h1>
+        <p class="reveal">Сіздерді 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
         <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:10px; margin: 30px 0;" class="reveal">
 
         <div class="info-grid reveal">
-            <div><b>Той иелері:</b> жары мен балалары</div>
             <div><b>Той орны:</b> “Бәйтерек” банкет залы</div>
             <div><b>Адресі:</b> Б.Момышұлы-2/4</div>
             <div><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
@@ -192,7 +165,7 @@
                 </select>
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет! Жауабыңыз қабылданды.</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды!</div>
         </div>
     </section>
 
@@ -202,13 +175,8 @@
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         musicBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                musicBtn.classList.add('playing');
-            } else {
-                audio.pause();
-                musicBtn.classList.remove('playing');
-            }
+            if (audio.paused) { audio.play(); musicBtn.classList.add('playing'); }
+            else { audio.pause(); musicBtn.classList.remove('playing'); }
         });
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
