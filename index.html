@@ -34,7 +34,7 @@
             position: fixed;
             bottom: 25px;
             right: 25px;
-            z-index: 100;
+            z-index: 1000;
             width: 60px;
             height: 60px;
             border-radius: 50%;
@@ -43,17 +43,27 @@
             border: 3px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
         }
-
-        @keyframes spin360 {
-            from { transform: rotate(0deg); }
-            to { transform: rotate(360deg); }
-        }
+        @keyframes spin360 { from { transform: rotate(0deg); } to { transform: rotate(360deg); } }
         .playing { animation: spin360 4s linear infinite; }
 
-        /* --- АНИМАЦИЯ ВРАЩЕНИЯ ОРНАМЕНТА --- */
+        /* --- ОБЩАЯ АНИМАЦИЯ ВРАЩЕНИЯ ФОНА --- */
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
+        }
+
+        /* ГЛАВНЫЙ ФОНОВЫЙ ОРНАМЕНТ (Общий на весь сайт) */
+        .bg-fixed-ornament {
+            position: fixed;
+            top: 25%;
+            left: 50%;
+            width: 130vw;
+            max-width: 1100px;
+            transform: translate(-50%, -50%);
+            opacity: 0.08;
+            z-index: -1;
+            pointer-events: none;
+            animation: slowRotate 60s linear infinite;
         }
 
         /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
@@ -63,32 +73,14 @@
             display: flex;
             justify-content: center;
             align-items: center;
-            background-color: var(--bg-color);
             overflow: hidden;
         }
 
         .hero-bg-text {
             position: relative;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
+            z-index: 2;
             text-align: center;
-            z-index: 1;
-            margin-top: -18vh; /* Подняли число 60 и ЖАС выше */
-        }
-
-        /* Фоновый вращающийся орнамент */
-        .bg-ornament {
-            position: absolute;
-            width: 120vw;
-            max-width: 900px;
-            opacity: 0.08; /* Легкая прозрачность */
-            z-index: -1;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            animation: slowRotate 50s linear infinite;
-            pointer-events: none;
+            margin-top: -18vh;
         }
 
         .num-60 {
@@ -112,11 +104,11 @@
             bottom: 0;
             width: 100%;
             height: 70vh; 
-            z-index: 2;
+            z-index: 10;
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-bottom: -5vh; /* Опустили фото мужчины ниже */
+            margin-bottom: -5vh;
         }
 
         .hero-photo {
@@ -133,7 +125,22 @@
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
+            position: relative;
+            z-index: 20;
         }
+
+        /* Дополнительные маленькие орнаменты в секции инфо */
+        .side-ornament {
+            position: absolute;
+            width: 30vw;
+            max-width: 250px;
+            opacity: 0.06;
+            z-index: -1;
+            pointer-events: none;
+            animation: slowRotate 40s linear infinite reverse; /* В другую сторону крутится */
+        }
+        .orn-1 { top: 10%; left: -10%; }
+        .orn-2 { bottom: 20%; right: -10%; }
 
         .title-main { 
             font-family: 'Cassandra', serif !important; 
@@ -151,8 +158,6 @@
             display: inline-block; 
         }
 
-        .info-grid b { color: var(--accent); }
-
         .btn-map { 
             display: inline-block; 
             padding: 18px 40px; 
@@ -161,20 +166,18 @@
             text-decoration: none; 
             border-radius: 50px; 
             font-weight: bold; 
-            margin: 20px 0;
-            transition: 0.3s;
         }
 
         .form-container { 
-            background: white; 
+            background: rgba(255, 255, 255, 0.9); 
             padding: 40px 20px; 
             border-radius: 20px; 
             box-shadow: 0 10px 30px rgba(0,0,0,0.05); 
             margin-top: 50px; 
         }
 
-        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; font-family: 'Montserrat', sans-serif; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; text-transform: uppercase; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 10px; }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 10px; cursor: pointer; }
 
         .reveal { visibility: hidden; }
 
@@ -183,20 +186,19 @@
             .word-zhas { font-size: 22vw; }
             .title-main { font-size: 1.8rem; }
             .info-grid { font-size: 1.5rem; }
-            .bg-ornament { width: 150vw; }
         }
     </style>
 </head>
 <body>
+
+    <!-- Главный орнамент, который не обрывается -->
+    <img src="ornament.png" class="bg-fixed-ornament" alt="">
 
     <div class="music-control" id="musicBtn"></div>
     <audio id="myAudio" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <section class="hero">
         <div class="hero-bg-text">
-            <!-- Вращающийся орнамент -->
-            <img src="ornament.png" class="bg-ornament" alt="">
-            
             <span class="num-60">60</span>
             <span class="word-zhas">ЖАС</span>
         </div>
@@ -206,6 +208,10 @@
     </section>
 
     <section class="section">
+        <!-- Маленькие орнаменты для второй страницы -->
+        <img src="ornament.png" class="side-ornament orn-1" alt="">
+        <img src="ornament.png" class="side-ornament orn-2" alt="">
+
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
         <p class="reveal" style="font-size: 1.2rem;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
@@ -234,35 +240,21 @@
                 </select>
                 <button type="submit" class="submit-btn" id="submitBtn">ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold; font-size: 1.2rem;">Жауабыңыз қабылданды! Рахмет.</div>
+            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды!</div>
         </div>
     </section>
 
     <script>
-        // Инициализация анимации ScrollReveal
         window.sr = ScrollReveal();
-        sr.reveal('.reveal', { 
-            delay: 200, 
-            distance: '50px', 
-            origin: 'bottom', 
-            duration: 1000,
-            viewFactor: 0.2 
-        });
+        sr.reveal('.reveal', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
 
-        // Логика музыки
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
         musicBtn.addEventListener('click', () => {
-            if (audio.paused) {
-                audio.play();
-                musicBtn.classList.add('playing');
-            } else {
-                audio.pause();
-                musicBtn.classList.remove('playing');
-            }
+            if (audio.paused) { audio.play(); musicBtn.classList.add('playing'); }
+            else { audio.pause(); musicBtn.classList.remove('playing'); }
         });
 
-        // Отправка формы в Google Таблицу
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
         form.addEventListener('submit', e => {
@@ -271,15 +263,8 @@
             btn.disabled = true;
             btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-                .then(() => {
-                    form.style.display = 'none';
-                    document.getElementById('msg').style.display = 'block';
-                })
-                .catch(() => {
-                    alert('Қате кетті!');
-                    btn.disabled = false;
-                    btn.innerText = 'ЖІБЕРУ';
-                });
+                .then(() => { form.style.display = 'none'; document.getElementById('msg').style.display = 'block'; })
+                .catch(() => { alert('Қате!'); btn.disabled = false; });
         });
     </script>
 </body>
