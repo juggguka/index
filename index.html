@@ -31,24 +31,19 @@
             scroll-behavior: smooth;
         }
 
-        /* --- КНОПКА МУЗЫКИ (Вращающаяся иконка) --- */
+        /* --- КНОПКА МУЗЫКИ --- */
         .music-control {
             position: fixed;
             bottom: 25px;
             right: 25px;
             z-index: 100;
-            width: 65px;
-            height: 65px;
+            width: 60px;
+            height: 60px;
             border-radius: 50%;
             cursor: pointer;
-            background-color: white;
-            background-image: url('music-icon.png');
-            background-size: 65%;
-            background-position: center;
-            background-repeat: no-repeat;
+            background: white url('music-icon.png') center/60% no-repeat;
             border: 3px solid var(--accent);
             box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-            transition: all 0.3s ease;
         }
 
         @keyframes spin360 {
@@ -56,26 +51,21 @@
             to { transform: rotate(360deg); }
         }
 
-        .playing {
-            animation: spin360 4s linear infinite;
-            box-shadow: 0 0 20px var(--accent);
-            border-color: #4a6350;
-        }
+        .playing { animation: spin360 4s linear infinite; }
 
         /* --- ГЛАВНЫЙ ЭКРАН --- */
         .hero {
-            min-height: 100vh;
+            height: 100vh;
             position: relative;
             display: flex;
-            flex-direction: column;
+            justify-content: center;
             align-items: center;
-            background-color: #e0e0d8;
+            background-color: var(--bg-color);
             overflow: hidden;
         }
 
-        .spacer { height: 12vh; width: 100%; }
-
-        .hero-text-wrapper {
+        .hero-bg-text {
+            position: absolute;
             display: flex;
             flex-direction: column;
             align-items: center;
@@ -86,39 +76,37 @@
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 100vw;
+            font-size: 50vw; /* Половина ширины экрана */
             font-weight: 900;
-            color: white;
-            line-height: 0.6; 
-            display: block;
+            color: var(--accent);
+            line-height: 0.8;
         }
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
-            font-size: 30vw;
-            color: white;
-            display: block;
-            margin-top: -5vw;
+            font-size: 15vw;
+            color: var(--accent);
+            text-transform: uppercase; /* Всегда заглавными */
+            margin-top: -2vw;
         }
 
         .hero-photo-container {
-            position: relative;
+            position: absolute;
+            bottom: 0;
             width: 100%;
             height: 80vh; 
-            z-index: 2; 
+            z-index: 2; /* Поверх текста */
             display: flex;
             justify-content: center;
             align-items: flex-end;
-            margin-top: -10vh;
         }
 
         .hero-photo {
-            width: 100%;
             height: 100%;
+            width: auto;
             object-fit: contain;
-            object-position: bottom center;
-            -webkit-mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 0%, black 70%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
         /* --- КОНТЕНТ --- */
@@ -129,18 +117,16 @@
             margin: 0 auto;
         }
 
-        .title-main { font-family: 'Cassandra', serif !important; font-size: 2.8rem; color: var(--accent); margin-bottom: 20px; }
+        .title-main { font-family: 'Cassandra', serif !important; font-size: 2.5rem; color: var(--accent); margin-bottom: 20px; }
         
         .info-grid {
             text-align: left;
             margin: 40px auto;
             display: inline-block;
             font-family: 'Cassandra', serif !important;
-            font-size: 2.2rem;
+            font-size: 2rem;
             line-height: 1.4;
         }
-
-        .info-item b { color: var(--accent); font-weight: normal; }
 
         .btn-map { 
             display: inline-block; padding: 15px 35px; background-color: var(--accent); 
@@ -149,19 +135,14 @@
 
         /* --- ФОРМА --- */
         .form-container { background: white; padding: 40px 20px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.05); margin-top: 50px; }
-        
-        #extra-question { display: none; margin-top: 10px; border-left: 4px solid var(--accent); padding-left: 15px; text-align: left; }
-
-        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; font-family: 'Montserrat', sans-serif; }
-
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; text-transform: uppercase; border-radius: 5px; cursor: pointer; }
+        input, select { width: 100%; padding: 15px; margin: 10px 0 20px; border: 1px solid #eee; border-radius: 5px; }
+        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; font-weight: bold; border-radius: 5px; cursor: pointer; }
 
         @media (max-width: 600px) {
-            .num-60 { font-size: 100vw; }
-            .word-zhas { font-size: 35vw; }
-            .info-grid { font-size: 1.6rem; }
+            .num-60 { font-size: 70vw; }
+            .word-zhas { font-size: 25vw; }
+            .info-grid { font-size: 1.5rem; }
             .title-main { font-size: 1.8rem; }
-            .music-control { width: 55px; height: 55px; bottom: 20px; right: 20px; }
         }
 
         .reveal { visibility: hidden; }
@@ -170,15 +151,12 @@
 <body>
 
     <div class="music-control" id="musicBtn"></div>
-    <audio id="myAudio" loop>
-        <source src="musica.mp3" type="audio/mpeg">
-    </audio>
+    <audio id="myAudio" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <section class="hero">
-        <div class="spacer"></div>
-        <div class="hero-text-wrapper">
+        <div class="hero-bg-text">
             <span class="num-60">60</span>
-            <span class="word-zhas">Жас</span>
+            <span class="word-zhas">ЖАС</span>
         </div>
         <div class="hero-photo-container">
             <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" alt="Берік Ғалымұлы" class="hero-photo">
@@ -186,17 +164,17 @@
     </section>
 
     <section class="section">
-        <p class="reveal" style="letter-spacing: 3px; font-size: 1.2rem;">СІЗДЕРДІ</p>
+        <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздын құрметті қонағы болуға шақырамыз.</p>
+        <p class="reveal">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:4px; margin: 30px 0;" class="reveal">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:10px; margin: 30px 0;" class="reveal">
 
         <div class="info-grid reveal">
-            <div class="info-item"><b>Той иелері:</b> жары мен балалары</div>
-            <div class="info-item"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
-            <div class="info-item"><b>Адресі:</b> Б.Момышұлы-2/4</div>
-            <div class="info-item"><b>Уақыты:</b> 2-шілде 2026-жыл, сағ. 17:00</div>
+            <div><b>Той иелері:</b> жары мен балалары</div>
+            <div><b>Той орны:</b> “Бәйтерек” банкет залы</div>
+            <div><b>Адресі:</b> Б.Момышұлы-2/4</div>
+            <div><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
         </div>
 
         <br>
@@ -212,15 +190,6 @@
                     <option value="Иә, келемін">Иә, келемін</option>
                     <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
                 </select>
-
-                <div id="extra-question">
-                    <p style="margin-bottom: 5px; font-weight: bold;">Жалғыз келесіз бе әлде жұбыңызбен бе?</p>
-                    <select name="кіммен">
-                        <option value="Жалғыз">Жалғыз келемін</option>
-                        <option value="Жұбыммен">Жұбыммен келемін</option>
-                    </select>
-                </div>
-
                 <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
             </form>
             <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Рахмет! Жауабыңыз қабылданды.</div>
@@ -228,39 +197,25 @@
     </section>
 
     <script>
-        ScrollReveal().reveal('.reveal', { delay: 300, distance: '50px', origin: 'bottom', interval: 200, duration: 1000 });
+        ScrollReveal().reveal('.reveal', { delay: 200, distance: '30px', origin: 'bottom', interval: 100 });
 
-        // Музыкальная логика
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
-        let isPlaying = false;
-
         musicBtn.addEventListener('click', () => {
-            if (isPlaying) {
+            if (audio.paused) {
+                audio.play();
+                musicBtn.classList.add('playing');
+            } else {
                 audio.pause();
                 musicBtn.classList.remove('playing');
-            } else {
-                audio.play().then(() => {
-                    musicBtn.classList.add('playing');
-                }).catch(err => {
-                    console.log("Нужен клик для старта");
-                });
             }
-            isPlaying = !isPlaying;
         });
 
-        // Логика доп. вопроса в анкете
-        document.getElementById('attendance').addEventListener('change', function() {
-            document.getElementById('extra-question').style.display = (this.value === 'Иә, келемін') ? 'block' : 'none';
-        });
-
-        // ОТПРАВКА В ТАБЛИЦУ (Твоя проверенная ссылка)
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
-        const btn = document.getElementById('submitBtn');
-
         form.addEventListener('submit', e => {
             e.preventDefault();
+            const btn = document.getElementById('submitBtn');
             btn.disabled = true;
             btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
@@ -271,7 +226,6 @@
                 .catch(() => {
                     alert('Қате кетті!');
                     btn.disabled = false;
-                    btn.innerText = 'Жіберу';
                 });
         });
     </script>
