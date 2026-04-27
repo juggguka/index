@@ -5,7 +5,6 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Берік Ғалымұлы - 60 жас</title>
     <link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&display=swap" rel="stylesheet">
-    <script src="https://unpkg.com/scrollreveal"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/parallax/3.1.0/parallax.min.js"></script>
     
     <style>
@@ -24,11 +23,11 @@
         body { 
             background-color: var(--bg-color); 
             font-family: 'Montserrat', sans-serif; 
-            color: #2c2c2c;
             overflow-x: hidden;
+            color: #2c2c2c;
         }
 
-        /* Кнопка музыки */
+        /* --- Кнопка музыки --- */
         .music-control {
             position: fixed;
             bottom: 25px;
@@ -49,7 +48,7 @@
         .hero-wrapper {
             position: relative;
             width: 100%;
-            height: 100vh; /* Строго высота экрана */
+            height: 100vh;
             overflow: hidden;
             background-color: var(--bg-color);
         }
@@ -57,124 +56,106 @@
         #scene {
             width: 100%;
             height: 100%;
+            position: relative;
         }
 
         .layer {
             position: absolute;
             width: 100%;
             height: 100%;
-        }
-
-        /* Центрирование текста и фото */
-        .flex-center {
             display: flex;
             justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 100%;
         }
 
+        /* Слово ЖАС (Фон на ширину страницы) */
         .word-zhas {
             font-family: 'Cassandra', serif;
-            font-size: 80vw;
+            font-size: 90vw; 
             color: var(--accent);
-            opacity: 0.1;
+            opacity: 0.12;
             text-transform: uppercase;
+            margin-top: 12vh;
             pointer-events: none;
+            letter-spacing: 1vw;
             white-space: nowrap;
         }
 
+        /* Число 60 (Высоко по центру) */
         .num-60 {
             font-family: 'Cassandra', serif;
-            font-size: 40vw;
+            font-size: 45vw;
             color: var(--accent);
             font-weight: 900;
+            margin-top: 5vh; 
+            pointer-events: none;
+            z-index: 2;
+        }
+
+        /* Орнаменты */
+        .ornament {
+            position: absolute;
+            width: 22vw;
+            opacity: 0.2;
             pointer-events: none;
         }
 
-        .photo-box {
-            display: flex;
-            justify-content: center;
+        /* Фото мужчины (Прижато к низу) */
+        .photo-layer {
             align-items: flex-end;
-            width: 100%;
-            height: 100%;
+            z-index: 10;
         }
 
         .hero-photo {
-            height: 75vh;
+            height: 80vh;
             width: auto;
             object-fit: contain;
             pointer-events: none;
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        .ornament {
-            position: absolute;
-            width: 25vw;
-            opacity: 0.15;
-            pointer-events: none;
-        }
-
-        /* --- ВТОРАЯ СЕКЦИЯ (ИНФО) --- */
+        /* --- ИНФО СЕКЦИЯ --- */
         .section {
-            position: relative;
-            z-index: 10; /* Чтобы была поверх параллакса при скролле */
-            background-color: var(--bg-color);
             padding: 80px 20px;
             text-align: center;
-            max-width: 1000px;
-            margin: 0 auto;
+            background: var(--bg-color);
+            position: relative;
+            z-index: 20;
         }
 
-        .title-main { 
-            font-family: 'Cassandra', serif; 
-            font-size: 2.8rem; 
-            color: var(--accent); 
-            margin-bottom: 30px; 
-        }
-
+        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin-bottom: 25px; }
+        
         .restaurant-img {
             width: 100%;
-            max-width: 700px;
+            max-width: 650px;
             border-radius: 15px;
             margin: 30px 0;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
         }
 
         .info-grid {
-            margin: 40px auto;
             font-family: 'Cassandra', serif;
             font-size: 2.2rem;
-            line-height: 1.5;
-            text-align: center;
+            line-height: 1.4;
+            margin: 30px 0;
         }
 
         .btn-map { 
             display: inline-block; 
-            padding: 18px 40px; 
+            padding: 16px 35px; 
             background: var(--accent); 
             color: white; 
             text-decoration: none; 
             border-radius: 50px; 
             font-weight: bold;
-            margin-bottom: 50px;
+            margin-bottom: 40px;
         }
 
-        /* Анкета */
-        .form-container { 
-            background: white; 
-            padding: 40px 25px; 
-            border-radius: 20px; 
-            box-shadow: 0 5px 25px rgba(0,0,0,0.05); 
-        }
-        input, select { width: 100%; padding: 18px; margin: 10px 0; border: 1px solid #ddd; border-radius: 10px; font-size: 1rem; }
-        .submit-btn { width: 100%; padding: 20px; background: var(--accent); color: white; border: none; border-radius: 10px; font-weight: bold; cursor: pointer; }
-
+        /* --- Адаптация для мобильных --- */
         @media (max-width: 600px) {
-            .num-60 { font-size: 55vw; }
-            .word-zhas { font-size: 100vw; }
-            .hero-photo { height: 70vh; }
+            .num-60 { font-size: 55vw; margin-top: 10vh; }
+            .word-zhas { font-size: 94vw; margin-top: 20vh; }
+            .hero-photo { height: 75vh; }
             .title-main { font-size: 1.8rem; }
             .info-grid { font-size: 1.6rem; }
         }
@@ -187,106 +168,66 @@
 
     <div class="hero-wrapper">
         <div id="scene">
+            <!-- Слой 1: ЖАС (Дальний фон) -->
             <div class="layer" data-depth="0.1">
-                <div class="flex-center">
-                    <h2 class="word-zhas">ЖАС</h2>
-                </div>
+                <h2 class="word-zhas">ЖАС</h2>
             </div>
 
-            <div class="layer" data-depth="0.5">
-                <img src="ornament.png" class="ornament" style="top: 10%; left: 5%;" alt="">
-                <img src="ornament.png" class="ornament" style="bottom: 15%; right: 5%; transform: rotate(180deg);" alt="">
+            <!-- Слой 2: Орнаменты -->
+            <div class="layer" data-depth="0.4">
+                <img src="ornament.png" class="ornament" style="top: 15%; left: 8%;" alt="">
+                <img src="ornament.png" class="ornament" style="top: 35%; right: 8%; transform: rotate(15deg);" alt="">
             </div>
 
-            <div class="layer" data-depth="0.3">
-                <div class="flex-center">
-                    <h1 class="num-60">60</h1>
-                </div>
+            <!-- Слой 3: 60 (Средний план) -->
+            <div class="layer" data-depth="0.25">
+                <h1 class="num-60">60</h1>
             </div>
 
-            <div class="layer" data-depth="0.2">
-                <div class="photo-box">
-                    <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" class="hero-photo" alt="">
-                </div>
+            <!-- Слой 4: Фото (Ближний план) -->
+            <div class="layer photo-layer" data-depth="0.15">
+                <img src="Gemini_Generated_Image_qibkb5qibkb5qibk-Photoroom.png" class="hero-photo" alt="Берік Ғалымұлы">
             </div>
         </div>
     </div>
 
     <section class="section">
         <h1 class="title-main">Асқар таудай әкеміз - Берік Ғалымұлының</h1>
-        <p style="font-size: 1.1rem;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <p>мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" class="restaurant-img" alt="Бәйтерек">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" class="restaurant-img" alt="Бәйтерек рестораны">
 
         <div class="info-grid">
-            <p><b>Той иелері:</b> жары мен балалары</p>
             <p><b>Той орны:</b> “Бәйтерек” банкет залы</p>
             <p><b>Адресі:</b> Б.Момышұлы-2/4</p>
-            <p><b>Уақыты:</b> 2-шілде 2026-жыл, сағ. 17:00</p>
+            <p><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</p>
         </div>
 
         <a href="https://2gis.kz/astana/firm/70000001083013833" class="btn-map">КАРТАДАН ҚАРАУ</a>
 
-        <div class="form-container">
-            <h2 style="margin-bottom: 20px;">САУАЛНАМА</h2>
-            <form id="invite-form">
-                <input type="text" name="аты" required placeholder="Атыңыз">
-                <input type="text" name="тегі" required placeholder="Тегіңіз">
-                <select name="жауап" id="attendance" required>
-                    <option value="" disabled selected>Келесіз бе?</option>
-                    <option value="Иә, келемін">Иә, келемін</option>
-                    <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
-                </select>
-                <div id="extra" style="display:none">
-                    <select name="кіммен">
-                        <option value="Жалғыз">Жалғыз келемін</option>
-                        <option value="Жұбыммен">Жұбыммен келемін</option>
-                    </select>
-                </div>
-                <button type="submit" class="submit-btn" id="submitBtn">Жіберу</button>
-            </form>
-            <p id="msg" style="display:none; color: var(--accent); margin-top:20px; font-weight: bold;">Рахмет! Жауап қабылданды.</p>
-        </div>
+        <!-- Форма здесь (если нужна) -->
     </section>
 
     <script>
-        // Инициализация параллакса строго внутри контейнера
+        // Инициализация параллакса
         var scene = document.getElementById('scene');
         var parallaxInstance = new Parallax(scene, {
             relativeInput: true,
             hoverOnly: false
         });
 
-        // Музыка
+        // Управление музыкой
         const audio = document.getElementById('myAudio');
         const btn = document.getElementById('musicBtn');
         btn.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); btn.classList.add('playing'); }
-            else { audio.pause(); btn.classList.remove('playing'); }
+            if (audio.paused) { 
+                audio.play(); 
+                btn.classList.add('playing'); 
+            } else { 
+                audio.pause(); 
+                btn.classList.remove('playing'); 
+            }
         });
-
-        // Анкета
-        document.getElementById('attendance').onchange = function() {
-            document.getElementById('extra').style.display = this.value === 'Иә, келемін' ? 'block' : 'none';
-        };
-
-        const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
-        const form = document.getElementById('invite-form');
-        form.onsubmit = e => {
-            e.preventDefault();
-            const sBtn = document.getElementById('submitBtn');
-            sBtn.disabled = true;
-            sBtn.innerText = 'Жіберілуде...';
-            fetch(scriptURL, { method: 'POST', body: new FormData(form)})
-            .then(() => { 
-                form.style.display = 'none'; 
-                document.getElementById('msg').style.display = 'block'; 
-            })
-            .catch(() => {
-                alert('Қате кетті!');
-                sBtn.disabled = false;
-            });
-        };
     </script>
 </body>
 </html>
