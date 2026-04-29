@@ -35,7 +35,6 @@
             to { transform: rotate(360deg); }
         }
 
-        /* Основной центральный орнамент (всегда на фоне) */
         .bg-fixed-ornament {
             position: fixed;
             top: 50%;
@@ -49,7 +48,7 @@
             animation: slowRotate 80s linear infinite;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН --- */
+        /* --- ГЛАВНЫЙ ЭКРАН (УМЕНЬШЕН ОТСТУП СВЕРХУ) --- */
         .hero {
             height: 100vh;
             position: relative;
@@ -65,7 +64,7 @@
             display: flex;
             flex-direction: column;
             width: 45%;
-            margin-top: -10vh;
+            margin-top: -15vh; /* Подняли выше */
         }
 
         .num-60 {
@@ -110,9 +109,9 @@
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        /* --- КОНТЕНТ --- */
+        /* --- КОНТЕНТ (УМЕНЬШЕНО РАССТОЯНИЕ МЕЖДУ СЕКЦИЯМИ) --- */
         .section {
-            padding: 100px 20px;
+            padding: 40px 20px 80px; /* Уменьшен верхний отступ */
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -120,7 +119,6 @@
             z-index: 30;
         }
 
-        /* Дополнительные боковые орнаменты на 2 странице */
         .side-orn {
             position: absolute;
             width: 250px;
@@ -129,7 +127,7 @@
             animation: slowRotate 40s linear infinite reverse;
         }
 
-        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin: 25px 0; }
+        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin: 15px 0; }
 
         /* --- КАРТОЧКА АНКЕТЫ --- */
         .form-card {
@@ -138,7 +136,7 @@
             border-radius: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.06);
             border: 1px solid rgba(113, 146, 121, 0.1);
-            margin-top: 60px;
+            margin-top: 40px;
             text-align: center;
         }
 
@@ -166,8 +164,7 @@
             letter-spacing: 2px;
         }
 
-        /* ТАЙМЕР */
-        .timer-container { margin: 50px 0; display: flex; justify-content: center; gap: 15px; }
+        .timer-container { margin: 40px 0; display: flex; justify-content: center; gap: 15px; }
         .timer-item { background: white; padding: 15px; border-radius: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
         .timer-val { display: block; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
 
@@ -180,12 +177,12 @@
         .reveal { visibility: hidden; }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; justify-content: flex-start; padding-top: 8vh; padding-left: 0; text-align: center; }
+            .hero { flex-direction: column; justify-content: flex-start; padding-top: 5vh; padding-left: 0; text-align: center; }
             .hero-title-block { width: 100%; align-items: center; }
             .num-60 { font-size: 40vw; }
             .word-zhas { font-size: 15vw; }
             .hero-photo-container { position: relative; width: 100%; height: 50vh; }
-            .form-card { padding: 30px 20px; }
+            .section { padding-top: 20px; }
         }
     </style>
 </head>
@@ -210,22 +207,23 @@
     </section>
 
     <section class="section">
-        <img src="ornament.png" class="side-orn" style="top: 0; left: -100px;" alt="">
+        <img src="ornament.png" class="side-orn" style="top: -50px; left: -100px;" alt="">
         <img src="ornament.png" class="side-orn" style="bottom: 200px; right: -100px;" alt="">
 
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар тау әкеміз - Берік Ғалымұлының</h1>
         <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:25px; margin: 50px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.1);" class="reveal">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:25px; margin: 30px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.1);" class="reveal">
 
-        <div class="info-grid reveal" style="font-family: 'Cassandra'; font-size: 1.8rem; text-align: left; margin: 30px 0;">
-            <div style="margin-bottom: 10px;"><b>Той иелері:</b> жары мен балалары</div>
-            <div style="margin-bottom: 10px;"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
-            <div style="margin-bottom: 10px;"><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
+        <div class="info-grid reveal" style="font-family: 'Cassandra'; font-size: 1.8rem; text-align: left; margin: 20px 0;">
+            <div style="margin-bottom: 8px;"><b>Той иелері:</b> жары мен балалары</div>
+            <div style="margin-bottom: 8px;"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
+            <div style="margin-bottom: 8px;"><b>Адресі:</b> Б.Момышұлы-2/4</div>
+            <div style="margin-bottom: 8px;"><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
         </div>
 
-        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" style="display: inline-block; padding: 20px 45px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 20px;">КАРТАДАН ҚАРАУ</a>
+        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" style="display: inline-block; padding: 20px 45px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 15px;">КАРТАДАН ҚАРАУ</a>
 
         <div class="timer-container reveal">
             <div class="timer-item"><span class="timer-val" id="days">00</span><span style="font-size: 0.7rem; color: #999;">күн</span></div>
@@ -235,10 +233,9 @@
 
         <div class="form-card reveal">
             <h2 style="font-family: 'Cassandra'; font-size: 2.2rem; color: var(--accent); margin-bottom: 10px;">Сауалнама</h2>
-            <p style="margin-bottom: 25px; color: #666; font-size: 0.9rem;">Тойға келетініңізді растауыңызды сұраймыз</p>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
-                <input type="text" name="тегі" required placeholder="Тегіньіз">
+                <input type="text" name="тегі" required placeholder="Тегіңіз">
                 <select name="жауап" required>
                     <option value="" disabled selected>Келесіз бе?</option>
                     <option value="Иә, келемін">Иә, келемін</option>
@@ -246,7 +243,7 @@
                 </select>
                 <button type="submit" class="submit-btn" id="submitBtn">ЖАУАП ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; margin-top:20px; color: var(--accent); font-weight: 700;">Жауабыңыз қабылданды! Рахмет!</div>
+            <div id="msg" style="display:none; margin-top:20px; color: var(--accent); font-weight: 700;">Жауабыңыз қабылданды!</div>
         </div>
     </section>
 
@@ -276,7 +273,7 @@
             btn.disabled = true; btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(() => { form.style.display = 'none'; document.getElementById('msg').style.display = 'block'; })
-                .catch(() => { alert('Қате!'); btn.disabled = false; btn.innerText = 'ЖАУАП ЖІБЕРУ'; });
+                .catch(() => { alert('Қате!'); btn.disabled = false; });
         };
     </script>
 </body>
