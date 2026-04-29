@@ -29,87 +29,73 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ФОНОВЫЙ ОРНАМЕНТ (Привязан к правой стороне) --- */
+        /* --- ФОНОВЫЕ ОРНАМЕНТЫ --- */
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
         }
 
+        /* Основной центральный орнамент (всегда на фоне) */
         .bg-fixed-ornament {
             position: fixed;
-            top: 40%;
-            right: -10vw; /* Сдвинут вправо */
-            width: 90vw;
-            max-width: 800px;
-            transform: translateY(-50%);
-            opacity: 0.06;
+            top: 50%;
+            left: 50%;
+            width: 110vw;
+            max-width: 900px;
+            transform: translate(-50%, -50%);
+            opacity: 0.07;
             z-index: -1;
             pointer-events: none;
-            animation: slowRotate 70s linear infinite;
+            animation: slowRotate 80s linear infinite;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) - АСИММЕТРИЧНАЯ КОМПОЗИЦИЯ --- */
+        /* --- ГЛАВНЫЙ ЭКРАН --- */
         .hero {
             height: 100vh;
             position: relative;
             display: flex;
-            align-items: center; /* Центрирование по вертикали */
-            justify-content: flex-start; /* Контент начинается слева */
-            padding: 0 5vw; /* Отступы по бокам */
+            align-items: center;
+            justify-content: flex-start;
+            padding: 0 7vw;
             overflow: hidden;
         }
 
-        /* БЛОК ТЕКСТА (Слева) */
         .hero-title-block {
             z-index: 20;
             display: flex;
             flex-direction: column;
-            align-items: flex-start; /* Выравнивание текста по левому краю */
-            width: 45%; /* Занимает чуть меньше половины ширины */
-            margin-top: -10vh; /* Немного приподнят */
-        }
-
-        .title-row-top {
-            display: flex;
-            align-items: baseline;
-            gap: 5px;
-            margin-bottom: 5px;
+            width: 45%;
+            margin-top: -10vh;
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 20vw; /* Уменьшили размер */
-            max-font-size: 180px;
-            font-weight: 900;
+            font-size: 18vw;
             color: var(--accent);
-            line-height: 1;
+            line-height: 0.9;
         }
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
-            font-size: 7vw;
-            max-font-size: 60px;
+            font-size: 8vw;
             color: var(--accent);
-            transform: translateY(-1vw);
+            margin-left: 10px;
         }
 
         .sub-title {
             font-size: 0.9rem;
             letter-spacing: 4px;
-            font-weight: 300;
-            color: var(--text-dark);
             text-transform: uppercase;
-            opacity: 0.8;
-            margin-left: 5px;
+            font-weight: 300;
+            margin-top: 5px;
         }
 
-        /* КОНТЕЙНЕР ДЛЯ ФОТО (Справа) */
         .hero-photo-container {
             position: absolute;
             bottom: 0;
-            right: 0; /* Прижат к правому краю */
-            width: 55%; /* Занимает чуть больше половины */
-            height: 80vh; /* Почти вся высота */
+            right: 0;
+            width: 60%;
+            height: 85vh;
             z-index: 10;
             display: flex;
             justify-content: center;
@@ -120,110 +106,86 @@
             height: 100%;
             width: auto;
             object-fit: contain;
-            /* Растворение нижнего края */
-            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        /* --- КОНТЕНТНАЯ СЕКЦИЯ (Обычная, по центру) --- */
+        /* --- КОНТЕНТ --- */
         .section {
-            padding: 80px 20px;
+            padding: 100px 20px;
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
             position: relative;
             z-index: 30;
-            background-color: var(--bg-color); /* Чтобы перекрыть фиксированный орнамент */
         }
 
-        .title-main { 
-            font-family: 'Cassandra', serif !important; 
-            font-size: 2.5rem; 
-            color: var(--accent); 
-            margin: 20px 0; 
+        /* Дополнительные боковые орнаменты на 2 странице */
+        .side-orn {
+            position: absolute;
+            width: 250px;
+            opacity: 0.05;
+            z-index: -1;
+            animation: slowRotate 40s linear infinite reverse;
         }
 
-        .info-grid { 
-            font-family: 'Cassandra', serif !important; 
-            font-size: 2rem; 
-            line-height: 1.5; 
-            margin: 40px 0; 
-            text-align: left; 
-            display: inline-block; 
-        }
+        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin: 25px 0; }
 
-        .btn-map { 
-            display: inline-block; 
-            padding: 18px 40px; 
-            background: var(--accent); 
-            color: white; 
-            text-decoration: none; 
-            border-radius: 50px; 
-            font-weight: bold; 
-            margin-bottom: 40px;
-        }
-
-        /* --- ТАЙМЕР --- */
-        .timer-container {
-            margin: 40px auto;
-            display: flex;
-            justify-content: center;
-            gap: 15px;
-        }
-        .timer-item {
+        /* --- КАРТОЧКА АНКЕТЫ --- */
+        .form-card {
             background: white;
-            padding: 15px;
-            border-radius: 12px;
-            min-width: 80px;
-            box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 20px 50px rgba(0,0,0,0.06);
+            border: 1px solid rgba(113, 146, 121, 0.1);
+            margin-top: 60px;
+            text-align: center;
         }
-        .timer-val { display: block; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
-        .timer-label { font-size: 0.7rem; color: #888; text-transform: uppercase; }
 
-        /* --- КНОПКА МУЗЫКИ --- */
-        .music-control {
-            position: fixed;
-            bottom: 25px;
-            right: 25px;
-            z-index: 1000;
-            width: 60px;
-            height: 60px;
-            border-radius: 50%;
-            cursor: pointer;
-            background: white url('music-icon.png') center/60% no-repeat;
-            border: 3px solid var(--accent);
+        input, select {
+            width: 100%;
+            padding: 18px;
+            margin: 12px 0;
+            border: 1px solid #f0f0f0;
+            border-radius: 15px;
+            background: #fafafa;
+            font-family: 'Montserrat', sans-serif;
+            font-size: 1rem;
         }
-        .playing { animation: spin360 4s linear infinite; }
+
+        .submit-btn {
+            width: 100%;
+            padding: 20px;
+            background: var(--accent);
+            color: white;
+            border: none;
+            border-radius: 15px;
+            font-weight: 700;
+            margin-top: 15px;
+            cursor: pointer;
+            letter-spacing: 2px;
+        }
+
+        /* ТАЙМЕР */
+        .timer-container { margin: 50px 0; display: flex; justify-content: center; gap: 15px; }
+        .timer-item { background: white; padding: 15px; border-radius: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .timer-val { display: block; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+
+        .music-control {
+            position: fixed; bottom: 25px; right: 25px; z-index: 1000;
+            width: 60px; height: 60px; border-radius: 50%; background: white url('music-icon.png') center/60% no-repeat;
+            border: 3px solid var(--accent); cursor: pointer;
+        }
 
         .reveal { visibility: hidden; }
 
-        /* Адаптация для мобильных */
         @media (max-width: 768px) {
-            .hero {
-                flex-direction: column;
-                justify-content: flex-start;
-                padding-top: 5vh;
-            }
-            .hero-title-block {
-                width: 90%;
-                align-items: center; /* На мобильном лучше по центру */
-                margin-top: 0;
-                margin-bottom: 3vh;
-            }
-            .title-row-top { align-items: baseline; justify-content: center;}
-            .num-60 { font-size: 35vw; }
-            .word-zhas { font-size: 14vw; }
-            .sub-title { font-size: 0.8rem; letter-spacing: 3px; margin-top: 0; }
-            
-            .hero-photo-container {
-                position: relative;
-                width: 100%;
-                height: 55vh;
-                right: auto;
-                left: 0;
-            }
-            .title-main { font-size: 1.8rem; }
-            .info-grid { font-size: 1.5rem; }
+            .hero { flex-direction: column; justify-content: flex-start; padding-top: 8vh; padding-left: 0; text-align: center; }
+            .hero-title-block { width: 100%; align-items: center; }
+            .num-60 { font-size: 40vw; }
+            .word-zhas { font-size: 15vw; }
+            .hero-photo-container { position: relative; width: 100%; height: 50vh; }
+            .form-card { padding: 30px 20px; }
         }
     </style>
 </head>
@@ -236,7 +198,7 @@
 
     <section class="hero">
         <div class="hero-title-block">
-            <div class="title-row-top">
+            <div style="display: flex; align-items: baseline;">
                 <span class="num-60">60</span>
                 <span class="word-zhas">жас</span>
             </div>
@@ -248,84 +210,74 @@
     </section>
 
     <section class="section">
+        <img src="ornament.png" class="side-orn" style="top: 0; left: -100px;" alt="">
+        <img src="ornament.png" class="side-orn" style="bottom: 200px; right: -100px;" alt="">
+
         <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар тау әкеміз - Берік Ғалымұлының</h1>
-        <p class="reveal" style="font-size: 1.2rem;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
+        <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:15px; margin: 40px 0;" class="reveal">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:25px; margin: 50px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.1);" class="reveal">
 
-        <div class="info-grid reveal">
-            <div><b>Той иелері:</b> жары мен балалары</div>
-            <div><b>Той орны:</b> “Бәйтерек” банкет залы</div>
-            <div><b>Адресі:</b> Б.Момышұлы-2/4</div>
-            <div><b>Уақыты:</b> 2-шілде 2026-жыл, сағат 17:00</div>
+        <div class="info-grid reveal" style="font-family: 'Cassandra'; font-size: 1.8rem; text-align: left; margin: 30px 0;">
+            <div style="margin-bottom: 10px;"><b>Той иелері:</b> жары мен балалары</div>
+            <div style="margin-bottom: 10px;"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
+            <div style="margin-bottom: 10px;"><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
         </div>
 
-        <br>
-        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" class="btn-map reveal">КАРТАДАН ҚАРАУ</a>
+        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" style="display: inline-block; padding: 20px 45px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 20px;">КАРТАДАН ҚАРАУ</a>
 
         <div class="timer-container reveal">
-            <div class="timer-item"><span class="timer-val" id="days">00</span><span class="timer-label">күн</span></div>
-            <div class="timer-item"><span class="timer-val" id="hours">00</span><span class="timer-label">сағат</span></div>
-            <div class="timer-item"><span class="timer-val" id="minutes">00</span><span class="timer-label">мин</span></div>
-            <div class="timer-item"><span class="timer-val" id="seconds">00</span><span class="timer-label">сек</span></div>
+            <div class="timer-item"><span class="timer-val" id="days">00</span><span style="font-size: 0.7rem; color: #999;">күн</span></div>
+            <div class="timer-item"><span class="timer-val" id="hours">00</span><span style="font-size: 0.7rem; color: #999;">сағат</span></div>
+            <div class="timer-item"><span class="timer-val" id="minutes">00</span><span style="font-size: 0.7rem; color: #999;">мин</span></div>
         </div>
 
-        <div class="form-container reveal">
-            <h2 style="margin-bottom: 20px; color: var(--accent);">САУАЛНАМА</h2>
+        <div class="form-card reveal">
+            <h2 style="font-family: 'Cassandra'; font-size: 2.2rem; color: var(--accent); margin-bottom: 10px;">Сауалнама</h2>
+            <p style="margin-bottom: 25px; color: #666; font-size: 0.9rem;">Тойға келетініңізді растауыңызды сұраймыз</p>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
-                <input type="text" name="тегі" required placeholder="Тегіңіз">
-                <select name="жауап" id="attendance" required>
+                <input type="text" name="тегі" required placeholder="Тегіньіз">
+                <select name="жауап" required>
                     <option value="" disabled selected>Келесіз бе?</option>
                     <option value="Иә, келемін">Иә, келемін</option>
                     <option value="Жоқ, келе алмаймын">Жоқ, келе алмаймын</option>
                 </select>
-                <button type="submit" class="submit-btn" id="submitBtn">ЖІБЕРУ</button>
+                <button type="submit" class="submit-btn" id="submitBtn">ЖАУАП ЖІБЕРУ</button>
             </form>
-            <div id="msg" style="display:none; text-align:center; margin-top:20px; color: var(--accent); font-weight: bold;">Жауабыңыз қабылданды!</div>
+            <div id="msg" style="display:none; margin-top:20px; color: var(--accent); font-weight: 700;">Жауабыңыз қабылданды! Рахмет!</div>
         </div>
     </section>
 
     <script>
         window.sr = ScrollReveal();
-        sr.reveal('.reveal', { delay: 200, distance: '50px', origin: 'bottom', duration: 1000 });
+        sr.reveal('.reveal', { delay: 200, distance: '40px', origin: 'bottom', duration: 1000 });
 
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
-        musicBtn.addEventListener('click', () => {
-            if (audio.paused) { audio.play(); musicBtn.classList.add('playing'); }
-            else { audio.pause(); musicBtn.classList.remove('playing'); }
-        });
+        musicBtn.onclick = () => { audio.paused ? (audio.play(), musicBtn.style.animation="spin360 4s linear infinite") : (audio.pause(), musicBtn.style.animation="none"); };
 
         function updateTimer() {
-            const targetDate = new Date("July 2, 2026 17:00:00").getTime();
-            const now = new Date().getTime();
-            const diff = targetDate - now;
+            const diff = new Date("July 2, 2026 17:00:00").getTime() - new Date().getTime();
             if (diff > 0) {
-                const d = Math.floor(diff / (1000 * 60 * 60 * 24));
-                const h = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-                const m = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
-                const s = Math.floor((diff % (1000 * 60)) / 1000);
-                document.getElementById("days").innerText = d < 10 ? "0"+d : d;
-                document.getElementById("hours").innerText = h < 10 ? "0"+h : h;
-                document.getElementById("minutes").innerText = m < 10 ? "0"+m : m;
-                document.getElementById("seconds").innerText = s < 10 ? "0"+s : s;
+                document.getElementById("days").innerText = Math.floor(diff / (1000 * 60 * 60 * 24));
+                document.getElementById("hours").innerText = Math.floor((diff % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                document.getElementById("minutes").innerText = Math.floor((diff % (1000 * 60 * 60)) / (1000 * 60));
             }
         }
         setInterval(updateTimer, 1000); updateTimer();
 
         const scriptURL = 'https://script.google.com/macros/s/AKfycbz0DbovH6IbFgXu2BT0epxZJpfiJweCpEIKmCt_zJDdSAT87UilXERWlUftvponc_PMKQ/exec';
         const form = document.getElementById('invite-form');
-        form.addEventListener('submit', e => {
+        form.onsubmit = e => {
             e.preventDefault();
             const btn = document.getElementById('submitBtn');
-            btn.disabled = true;
-            btn.innerText = 'Жіберілуде...';
+            btn.disabled = true; btn.innerText = 'Жіберілуде...';
             fetch(scriptURL, { method: 'POST', body: new FormData(form)})
                 .then(() => { form.style.display = 'none'; document.getElementById('msg').style.display = 'block'; })
-                .catch(() => { alert('Қате!'); btn.disabled = false; });
-        });
+                .catch(() => { alert('Қате!'); btn.disabled = false; btn.innerText = 'ЖАУАП ЖІБЕРУ'; });
+        };
     </script>
 </body>
 </html>
