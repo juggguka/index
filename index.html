@@ -29,7 +29,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ФОНОВЫЙ ОРНАМЕНТ --- */
+        /* --- ФОНОВЫЙ ОРНАМЕНТ (Привязан к правой стороне) --- */
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -37,47 +37,49 @@
 
         .bg-fixed-ornament {
             position: fixed;
-            top: 30%;
-            left: 50%;
-            width: 120vw;
-            max-width: 1000px;
-            transform: translate(-50%, -50%);
-            opacity: 0.07;
+            top: 40%;
+            right: -10vw; /* Сдвинут вправо */
+            width: 90vw;
+            max-width: 800px;
+            transform: translateY(-50%);
+            opacity: 0.06;
             z-index: -1;
             pointer-events: none;
-            animation: slowRotate 60s linear infinite;
+            animation: slowRotate 70s linear infinite;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (HERO) --- */
+        /* --- ГЛАВНЫЙ ЭКРАН (HERO) - АСИММЕТРИЧНАЯ КОМПОЗИЦИЯ --- */
         .hero {
             height: 100vh;
             position: relative;
             display: flex;
-            flex-direction: column;
-            align-items: center;
-            justify-content: flex-start; /* Начинаем контент сверху */
-            padding-top: 8vh;
+            align-items: center; /* Центрирование по вертикали */
+            justify-content: flex-start; /* Контент начинается слева */
+            padding: 0 5vw; /* Отступы по бокам */
             overflow: hidden;
         }
 
-        .hero-title {
+        /* БЛОК ТЕКСТА (Слева) */
+        .hero-title-block {
             z-index: 20;
-            text-align: center;
             display: flex;
             flex-direction: column;
-            align-items: center;
+            align-items: flex-start; /* Выравнивание текста по левому краю */
+            width: 45%; /* Занимает чуть меньше половины ширины */
+            margin-top: -10vh; /* Немного приподнят */
         }
 
         .title-row-top {
             display: flex;
             align-items: baseline;
-            gap: 10px;
+            gap: 5px;
+            margin-bottom: 5px;
         }
 
         .num-60 {
             font-family: 'Cassandra', serif !important;
-            font-size: 35vw; /* Уменьшили, чтобы было аккуратно */
-            max-size: 250px;
+            font-size: 20vw; /* Уменьшили размер */
+            max-font-size: 180px;
             font-weight: 900;
             color: var(--accent);
             line-height: 1;
@@ -85,27 +87,29 @@
 
         .word-zhas {
             font-family: 'Cassandra', serif !important;
-            font-size: 12vw;
-            max-size: 80px;
+            font-size: 7vw;
+            max-font-size: 60px;
             color: var(--accent);
-            transform: translateY(-2vw);
+            transform: translateY(-1vw);
         }
 
         .sub-title {
-            font-size: 1.2rem;
-            letter-spacing: 5px;
+            font-size: 0.9rem;
+            letter-spacing: 4px;
             font-weight: 300;
             color: var(--text-dark);
             text-transform: uppercase;
-            margin-top: -10px;
             opacity: 0.8;
+            margin-left: 5px;
         }
 
+        /* КОНТЕЙНЕР ДЛЯ ФОТО (Справа) */
         .hero-photo-container {
             position: absolute;
             bottom: 0;
-            width: 100%;
-            height: 65vh; /* Фото занимает нижнюю часть */
+            right: 0; /* Прижат к правому краю */
+            width: 55%; /* Занимает чуть больше половины */
+            height: 80vh; /* Почти вся высота */
             z-index: 10;
             display: flex;
             justify-content: center;
@@ -116,11 +120,12 @@
             height: 100%;
             width: auto;
             object-fit: contain;
-            -webkit-mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
-            mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
+            /* Растворение нижнего края */
+            -webkit-mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
+            mask-image: linear-gradient(to bottom, black 80%, transparent 100%);
         }
 
-        /* --- КОНТЕНТНАЯ СЕКЦИЯ --- */
+        /* --- КОНТЕНТНАЯ СЕКЦИЯ (Обычная, по центру) --- */
         .section {
             padding: 80px 20px;
             text-align: center;
@@ -128,6 +133,7 @@
             margin: 0 auto;
             position: relative;
             z-index: 30;
+            background-color: var(--bg-color); /* Чтобы перекрыть фиксированный орнамент */
         }
 
         .title-main { 
@@ -191,11 +197,33 @@
 
         .reveal { visibility: hidden; }
 
-        @media (max-width: 600px) {
-            .num-60 { font-size: 45vw; }
-            .word-zhas { font-size: 18vw; }
-            .sub-title { font-size: 0.9rem; letter-spacing: 3px; }
-            .hero-photo-container { height: 60vh; }
+        /* Адаптация для мобильных */
+        @media (max-width: 768px) {
+            .hero {
+                flex-direction: column;
+                justify-content: flex-start;
+                padding-top: 5vh;
+            }
+            .hero-title-block {
+                width: 90%;
+                align-items: center; /* На мобильном лучше по центру */
+                margin-top: 0;
+                margin-bottom: 3vh;
+            }
+            .title-row-top { align-items: baseline; justify-content: center;}
+            .num-60 { font-size: 35vw; }
+            .word-zhas { font-size: 14vw; }
+            .sub-title { font-size: 0.8rem; letter-spacing: 3px; margin-top: 0; }
+            
+            .hero-photo-container {
+                position: relative;
+                width: 100%;
+                height: 55vh;
+                right: auto;
+                left: 0;
+            }
+            .title-main { font-size: 1.8rem; }
+            .info-grid { font-size: 1.5rem; }
         }
     </style>
 </head>
@@ -207,7 +235,7 @@
     <audio id="myAudio" loop><source src="musica.mp3" type="audio/mpeg"></audio>
 
     <section class="hero">
-        <div class="hero-title">
+        <div class="hero-title-block">
             <div class="title-row-top">
                 <span class="num-60">60</span>
                 <span class="word-zhas">жас</span>
