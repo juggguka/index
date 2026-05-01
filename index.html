@@ -29,7 +29,7 @@
             scroll-behavior: smooth;
         }
 
-        /* --- ФОНОВЫЕ ОРНАМЕНТЫ --- */
+        /* --- ФОНОВЫЙ ОРНАМЕНТ --- */
         @keyframes slowRotate {
             from { transform: rotate(0deg); }
             to { transform: rotate(360deg); }
@@ -48,14 +48,14 @@
             animation: slowRotate 80s linear infinite;
         }
 
-        /* --- ГЛАВНЫЙ ЭКРАН (УМЕНЬШЕН ОТСТУП СВЕРХУ) --- */
+        /* --- ГЛАВНЫЙ ЭКРАН (ИСПРАВЛЕНО) --- */
         .hero {
-            height: 100vh;
+            min-height: 90vh; /* Убрали жесткий 100vh для плавного перехода */
             position: relative;
             display: flex;
             align-items: center;
             justify-content: flex-start;
-            padding: 0 7vw;
+            padding: 50px 7vw 0;
             overflow: hidden;
         }
 
@@ -64,7 +64,7 @@
             display: flex;
             flex-direction: column;
             width: 45%;
-            margin-top: -15vh; /* Подняли выше */
+            margin-top: 5vh; /* Теперь текст на своем месте, не улетает вверх */
         }
 
         .num-60 {
@@ -94,7 +94,7 @@
             bottom: 0;
             right: 0;
             width: 60%;
-            height: 85vh;
+            height: 75vh;
             z-index: 10;
             display: flex;
             justify-content: center;
@@ -109,9 +109,9 @@
             mask-image: linear-gradient(to bottom, black 85%, transparent 100%);
         }
 
-        /* --- КОНТЕНТ (УМЕНЬШЕНО РАССТОЯНИЕ МЕЖДУ СЕКЦИЯМИ) --- */
+        /* --- КОНТЕНТ (БЕЗ ДЫР) --- */
         .section {
-            padding: 40px 20px 80px; /* Уменьшен верхний отступ */
+            padding: 20px 20px 80px; /* Минимальный верхний отступ */
             text-align: center;
             max-width: 800px;
             margin: 0 auto;
@@ -121,34 +121,31 @@
 
         .side-orn {
             position: absolute;
-            width: 250px;
+            width: 200px;
             opacity: 0.05;
             z-index: -1;
             animation: slowRotate 40s linear infinite reverse;
         }
 
-        .title-main { font-family: 'Cassandra', serif; font-size: 2.5rem; color: var(--accent); margin: 15px 0; }
+        .title-main { font-family: 'Cassandra', serif; font-size: 2.2rem; color: var(--accent); margin: 15px 0; }
 
         /* --- КАРТОЧКА АНКЕТЫ --- */
         .form-card {
             background: white;
-            padding: 50px 40px;
+            padding: 40px;
             border-radius: 30px;
             box-shadow: 0 20px 50px rgba(0,0,0,0.06);
             border: 1px solid rgba(113, 146, 121, 0.1);
-            margin-top: 40px;
-            text-align: center;
+            margin-top: 30px;
         }
 
         input, select {
             width: 100%;
             padding: 18px;
-            margin: 12px 0;
+            margin: 10px 0;
             border: 1px solid #f0f0f0;
             border-radius: 15px;
             background: #fafafa;
-            font-family: 'Montserrat', sans-serif;
-            font-size: 1rem;
         }
 
         .submit-btn {
@@ -159,14 +156,12 @@
             border: none;
             border-radius: 15px;
             font-weight: 700;
-            margin-top: 15px;
             cursor: pointer;
-            letter-spacing: 2px;
         }
 
-        .timer-container { margin: 40px 0; display: flex; justify-content: center; gap: 15px; }
-        .timer-item { background: white; padding: 15px; border-radius: 15px; min-width: 80px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
-        .timer-val { display: block; font-size: 1.8rem; font-weight: 700; color: var(--accent); }
+        .timer-container { margin: 30px 0; display: flex; justify-content: center; gap: 15px; }
+        .timer-item { background: white; padding: 15px; border-radius: 15px; min-width: 75px; box-shadow: 0 5px 15px rgba(0,0,0,0.03); }
+        .timer-val { display: block; font-size: 1.6rem; font-weight: 700; color: var(--accent); }
 
         .music-control {
             position: fixed; bottom: 25px; right: 25px; z-index: 1000;
@@ -177,12 +172,12 @@
         .reveal { visibility: hidden; }
 
         @media (max-width: 768px) {
-            .hero { flex-direction: column; justify-content: flex-start; padding-top: 5vh; padding-left: 0; text-align: center; }
-            .hero-title-block { width: 100%; align-items: center; }
-            .num-60 { font-size: 40vw; }
-            .word-zhas { font-size: 15vw; }
-            .hero-photo-container { position: relative; width: 100%; height: 50vh; }
-            .section { padding-top: 20px; }
+            .hero { flex-direction: column; justify-content: flex-start; padding-top: 5vh; min-height: 70vh; }
+            .hero-title-block { width: 100%; align-items: center; margin-top: 0; }
+            .num-60 { font-size: 35vw; }
+            .word-zhas { font-size: 14vw; }
+            .hero-photo-container { position: relative; width: 100%; height: 45vh; margin-top: 20px; }
+            .section { padding-top: 10px; }
         }
     </style>
 </head>
@@ -207,32 +202,31 @@
     </section>
 
     <section class="section">
-        <img src="ornament.png" class="side-orn" style="top: -50px; left: -100px;" alt="">
-        <img src="ornament.png" class="side-orn" style="bottom: 200px; right: -100px;" alt="">
-
-        <p class="reveal" style="letter-spacing: 3px; font-size: 1.1rem; color: #888;">СІЗДЕРДІ</p>
+        <img src="ornament.png" class="side-orn" style="top: -20px; left: -80px;" alt="">
+        
+        <p class="reveal" style="letter-spacing: 3px; font-size: 1rem; color: #888;">СІЗДЕРДІ</p>
         <h1 class="title-main reveal">Асқар тау әкеміз - Берік Ғалымұлының</h1>
         <p class="reveal" style="font-size: 1.1rem; line-height: 1.6;">мерейлі 60 жасқа толу тойына арналған ақ дастарханымыздың құрметті қонағы болуға шақырамыз.</p>
         
-        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:25px; margin: 30px 0; box-shadow: 0 15px 40px rgba(0,0,0,0.1);" class="reveal">
+        <img src="Gemini_Generated_Image_l3cl6gl3cl6gl3cl.png" alt="Бәйтерек" style="width:100%; border-radius:25px; margin: 30px 0; box-shadow: 0 10px 30px rgba(0,0,0,0.1);" class="reveal">
 
-        <div class="info-grid reveal" style="font-family: 'Cassandra'; font-size: 1.8rem; text-align: left; margin: 20px 0;">
-            <div style="margin-bottom: 8px;"><b>Той иелері:</b> жары мен балалары</div>
-            <div style="margin-bottom: 8px;"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
-            <div style="margin-bottom: 8px;"><b>Адресі:</b> Б.Момышұлы-2/4</div>
-            <div style="margin-bottom: 8px;"><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
+        <div class="info-grid reveal" style="font-family: 'Cassandra'; font-size: 1.6rem; text-align: left; margin: 20px 0;">
+            <div style="margin-bottom: 5px;"><b>Той иелері:</b> жары мен балалары</div>
+            <div style="margin-bottom: 5px;"><b>Той орны:</b> “Бәйтерек” банкет залы</div>
+            <div style="margin-bottom: 5px;"><b>Адресі:</b> Б.Момышұлы-2/4</div>
+            <div style="margin-bottom: 5px;"><b>Уақыты:</b> 2-шілде 2026-жыл, 17:00</div>
         </div>
 
-        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" style="display: inline-block; padding: 20px 45px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 15px;">КАРТАДАН ҚАРАУ</a>
+        <a href="https://2gis.kz/astana/firm/70000001083013833" target="_blank" style="display: inline-block; padding: 18px 40px; background: var(--accent); color: white; text-decoration: none; border-radius: 50px; font-weight: 700; margin-top: 10px;">КАРТАДАН ҚАРАУ</a>
 
         <div class="timer-container reveal">
-            <div class="timer-item"><span class="timer-val" id="days">00</span><span style="font-size: 0.7rem; color: #999;">күн</span></div>
-            <div class="timer-item"><span class="timer-val" id="hours">00</span><span style="font-size: 0.7rem; color: #999;">сағат</span></div>
-            <div class="timer-item"><span class="timer-val" id="minutes">00</span><span style="font-size: 0.7rem; color: #999;">мин</span></div>
+            <div class="timer-item"><span class="timer-val" id="days">00</span><span style="font-size: 0.6rem; color: #999;">күн</span></div>
+            <div class="timer-item"><span class="timer-val" id="hours">00</span><span style="font-size: 0.6rem; color: #999;">сағат</span></div>
+            <div class="timer-item"><span class="timer-val" id="minutes">00</span><span style="font-size: 0.6rem; color: #999;">мин</span></div>
         </div>
 
         <div class="form-card reveal">
-            <h2 style="font-family: 'Cassandra'; font-size: 2.2rem; color: var(--accent); margin-bottom: 10px;">Сауалнама</h2>
+            <h2 style="font-family: 'Cassandra'; font-size: 2rem; color: var(--accent); margin-bottom: 10px;">Сауалнама</h2>
             <form id="invite-form">
                 <input type="text" name="аты" required placeholder="Атыңыз">
                 <input type="text" name="тегі" required placeholder="Тегіңіз">
@@ -249,7 +243,7 @@
 
     <script>
         window.sr = ScrollReveal();
-        sr.reveal('.reveal', { delay: 200, distance: '40px', origin: 'bottom', duration: 1000 });
+        sr.reveal('.reveal', { delay: 200, distance: '30px', origin: 'bottom', duration: 1000 });
 
         const audio = document.getElementById('myAudio');
         const musicBtn = document.getElementById('musicBtn');
